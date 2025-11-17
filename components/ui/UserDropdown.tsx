@@ -15,6 +15,13 @@ import { JSX } from "react";
 import { Button } from "./button";
 import NavItems from "./NavItems";
 
+/**
+ * UserDropdown component rendering the current user's avatar and menu.
+ *
+ * This component does not accept props and uses routing to handle sign-out.
+ *
+ * @returns {JSX.Element} Dropdown menu with user info, navigation items and logout action.
+ */
 export const UserDropdown: () => JSX.Element = () => {
   const router: AppRouterInstance = useRouter();
 
