@@ -4,6 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { JSX } from "react";
 
+/**
+ * NavItems component rendering a list of navigation links from `NAV_ITEMS`.
+ *
+ * This component determines the active route and applies an active style to the corresponding link.
+ *
+ * @returns {JSX.Element} A list of navigation links with active-route highlighting.
+ */
 const NavItems = (): JSX.Element => {
   const pathName: string = usePathname();
   const isActive: (path: string) => boolean = (path: string) => {
