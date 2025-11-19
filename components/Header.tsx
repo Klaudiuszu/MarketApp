@@ -4,6 +4,15 @@ import { JSX } from "react";
 import NavItems from "./ui/NavItems";
 import { UserDropdown } from "./ui/UserDropdown";
 
+/**
+ * Header
+ *
+ * Top-level application header containing the logo, navigation and user
+ * dropdown. This component is used on every page to provide consistent
+ * branding and navigation.
+ *
+ * @returns {JSX.Element} The site header element.
+ */
 const Header = (): JSX.Element => {
   return (
     <header className="sticky top-0 header">
