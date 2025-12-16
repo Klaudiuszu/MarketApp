@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { JSX } from "react";
 import NavItems from "./ui/NavItems";
-import { UserDropdown } from "./ui/UserDropdown";
+import UserDropdown from "./ui/UserDropdown";
 
 /**
  * Header
@@ -13,7 +13,7 @@ import { UserDropdown } from "./ui/UserDropdown";
  *
  * @returns {JSX.Element} The site header element.
  */
-const Header = (): JSX.Element => {
+const Header = ({ user }: { user: User }): JSX.Element => {
   return (
     <header className="sticky top-0 header">
       <div className="container header-wrapper">
@@ -27,9 +27,9 @@ const Header = (): JSX.Element => {
           />
         </Link>
         <nav className="hidden sm:block">
-          <NavItems />
+          <NavItems initialStocks={[]} />
         </nav>
-        <UserDropdown />
+        <UserDropdown user={user} initialStocks={[]} />
       </div>
     </header>
   );
