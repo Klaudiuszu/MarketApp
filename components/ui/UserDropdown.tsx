@@ -1,5 +1,7 @@
 "use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,38 +10,34 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { signOut } from "@/lib/actions/auth.actions";
 import { LogOut } from "lucide-react";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useRouter } from "next/navigation";
-import { JSX } from "react";
-import { Button } from "./button";
 import NavItems from "./NavItems";
 
-/**
- * UserDropdown component rendering the current user's avatar and menu.
- *
- * This component does not accept props and uses routing to handle sign-out.
- *
- * @returns {JSX.Element} Dropdown menu with user info, navigation items and logout action.
- */
-export const UserDropdown: () => JSX.Element = () => {
-  const router: AppRouterInstance = useRouter();
+const UserDropdown = ({
+  user,
+  initialStocks,
+}: {
+  user: User;
+  initialStocks: StockWithWatchlistStatus[];
+}) => {
+  const router = useRouter();
 
-  const handleSignOut: () => Promise<void> = async () => {
-    router.push("/sig-in");
+  const handleSignOut = async () => {
+    await signOut();
+    router.push("/sign-in");
   };
-
-  const user = { name: "John Doe", email: "polskagurom@polska.com" };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center gap-3 text-gray-400 hover:text-yellow-500"
+          className="flex items-center gap-3 text-gray-4 hover:text-yellow-500"
         >
           <Avatar className="h-8 w-8">
-            <AvatarImage />
+            <AvatarImage src="https://wallpapers.com/images/hd/business-cat-meme.png-1c1hpvq955hqoeht.png" />
             <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
               {user.name[0]}
             </AvatarFallback>
@@ -51,11 +49,11 @@ export const UserDropdown: () => JSX.Element = () => {
           </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="text-gray-500">
+      <DropdownMenuContent className="text-gray-400">
         <DropdownMenuLabel>
           <div className="flex relative items-center gap-3 py-2">
-            <Avatar className="h-8 w-8">
-              <AvatarImage />
+            <Avatar className="h-10 w-10">
+              <AvatarImage src="https://wallpapers.com/images/hd/business-cat-meme.png-1c1hpvq955hqoeht.png" />
               <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
                 {user.name[0]}
               </AvatarFallback>
@@ -78,9 +76,10 @@ export const UserDropdown: () => JSX.Element = () => {
         </DropdownMenuItem>
         <DropdownMenuSeparator className="hidden sm:block bg-gray-600" />
         <nav className="sm:hidden">
-          <NavItems />
+          <NavItems initialStocks={initialStocks} />
         </nav>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
+export default UserDropdown;
