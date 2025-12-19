@@ -2,10 +2,14 @@
 
 import { Table } from "@tanstack/react-table";
 import BlotterBody from "./BlotterBody";
+import BlotterControlBar from "./BlotterControlBar";
 import BlotterHeader from "./BlotterHeader";
+import { ApiStatus } from "./constants";
 
 export type BlotterProps<TData> = {
   table: Table<TData>;
+  title?: string;
+  status?: ApiStatus;
   customCellRenderers?: Record<
     string,
     (value: any, row: TData) => React.ReactNode
@@ -17,7 +21,6 @@ export type BlotterProps<TData> = {
     oddRowClass?: string;
   };
   className?: string;
-  footerContent?: React.ReactNode;
 };
 
 /**
@@ -37,8 +40,9 @@ export type BlotterProps<TData> = {
  */
 export default function Blotter<TData>({
   table,
+  title = "Blotter",
+  status = ApiStatus.UNKNOWN,
   className = "",
-  footerContent,
   zebraStriping = {
     enabled: true,
     evenRowClass: "bg-gray-800/60",
@@ -47,12 +51,27 @@ export default function Blotter<TData>({
 }: BlotterProps<TData>) {
   return (
     <div
-      className={`w-full overflow-auto border rounded-md bg-gray-900 border-gray-700 shadow-sm text-gray-200 ${className}`}
+      className={`w-full h-[600px] overflow-auto border rounded-md bg-gray-900 border-gray-700 shadow-sm text-gray-200 ${className}`}
     >
-      <table className="min-w-full table-fixed text-sm">
-        <BlotterHeader table={table} />
-        <BlotterBody table={table} zebraStriping={zebraStriping} />
-      </table>
+      <div className="sticky top-0 z-20 bg-gray-900 border-b border-gray-700">
+        <BlotterControlBar title={title} status={status} />
+        <div className="overflow-hidden">
+          <table
+            className="min-w-full table-fixed text-sm"
+            style={{ tableLayout: "fixed" }}
+          >
+            <BlotterHeader table={table} />
+          </table>
+        </div>
+      </div>
+      <div className="overflow-auto">
+        <table
+          className="min-w-full table-fixed text-sm"
+          style={{ tableLayout: "fixed" }}
+        >
+          <BlotterBody table={table} zebraStriping={zebraStriping} />
+        </table>
+      </div>
     </div>
   );
 }

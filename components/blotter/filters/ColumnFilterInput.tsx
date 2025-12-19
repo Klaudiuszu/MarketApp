@@ -15,6 +15,8 @@ export default function ColumnFilterInput({ column }: ColumnFilterInputProps) {
 
   const value = column.getFilterValue() ?? "";
 
+  console.log({ value });
+
   return (
     <div className="w-full">
       <div className="relative">
@@ -22,7 +24,7 @@ export default function ColumnFilterInput({ column }: ColumnFilterInputProps) {
           value={String(value)}
           onChange={(e) => column.setFilterValue(e.target.value || undefined)}
           placeholder="filter..."
-          className="w-full px-2 py-[1] text-[10px] border bg-gray-700 border-gray-600 text-gray-500 placeholder:text-gray-400/10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
+          className="w-full py-[1] pl-2 text-[10px] border bg-gray-700 border-gray-600 text-gray-500 placeholder:text-gray-400/10 focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500"
           aria-label={`Filter ${column.id} column`}
         />
         {value && (

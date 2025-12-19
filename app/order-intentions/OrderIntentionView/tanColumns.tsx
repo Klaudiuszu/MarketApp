@@ -1,10 +1,8 @@
 "use client";
 
-import {
-  CurrencyCellRenderer,
-  DefaultCellRenderer,
-  SideCellRenderer,
-} from "@/components/blotter/cellRenderers";
+import { DefaultCellRenderer } from "@/components/blotter/cellRenderers";
+import { CurrencyCellRenderer } from "@/components/blotter/cellRenderers/CurrencyCellRenderer";
+import { SideCellRenderer } from "@/components/blotter/cellRenderers/SideCellRenderer";
 import { IOrderIntentionsType } from "@/database/mocks/orderIntentionsMock";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -14,30 +12,35 @@ export const tanColumns: ColumnDef<IOrderIntentionsType>[] = [
     header: "Order ID",
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("id")} />,
     enableSorting: true,
+    size: 120,
   },
   {
     accessorKey: "symbol",
     header: "Symbol",
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("symbol")} />,
     enableSorting: true,
+    size: 90,
   },
   {
     accessorKey: "side",
     header: "Side",
     cell: ({ row }) => <SideCellRenderer value={row.getValue("side")} />,
     enableSorting: true,
+    size: 80,
   },
   {
     accessorKey: "quantity",
     header: "Quantity",
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("quantity")} />,
     enableSorting: true,
+    size: 100,
   },
   {
     accessorKey: "price",
     header: "Price",
     cell: ({ row }) => <CurrencyCellRenderer value={row.getValue("price")} />,
     enableSorting: true,
+    size: 110,
   },
   {
     accessorKey: "orderType",
@@ -46,20 +49,23 @@ export const tanColumns: ColumnDef<IOrderIntentionsType>[] = [
       <DefaultCellRenderer value={row.getValue("orderType")} />
     ),
     enableSorting: true,
+    size: 90,
   },
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("status")} />,
     enableSorting: true,
+    size: 100,
   },
   {
     accessorKey: "timeInForce",
     header: "TIF",
     cell: ({ row }) => (
-      <div className="text-gray-300 text-xs">{row.getValue("timeInForce")}</div>
+      <DefaultCellRenderer value={row.getValue("timeInForce")} />
     ),
     enableSorting: true,
+    size: 70,
   },
   {
     accessorKey: "createdAt",
@@ -68,23 +74,27 @@ export const tanColumns: ColumnDef<IOrderIntentionsType>[] = [
       <DefaultCellRenderer value={row.getValue("createdAt")} />
     ),
     enableSorting: true,
+    size: 140,
   },
   {
     accessorKey: "traderId",
     header: "Trader",
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("traderId")} />,
     enableSorting: true,
+    size: 90,
   },
   {
     accessorKey: "account",
     header: "Account",
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("account")} />,
     enableSorting: true,
+    size: 130,
   },
   {
     accessorKey: "strategy",
     header: "Strategy",
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("strategy")} />,
     enableSorting: true,
+    size: 120,
   },
 ];
