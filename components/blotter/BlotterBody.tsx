@@ -108,17 +108,26 @@ function TableCell<TData>({
 }: TableCellProps<TData>) {
   const cellValue = cell.getValue();
   const isNumeric = typeof cellValue === "number";
+  const columnSize = cell.column.getSize();
 
   return (
     <td
       key={cell.id}
-      className={`px-3 py-1 text-[12px] whitespace-nowrap align-middle ${
+      className={`py-1 text-[12px] whitespace-nowrap align-middle ${
         isNumeric ? "text-right" : "text-left"
       } ${cellIndex < totalCells - 1 ? "border-r border-gray-700/60" : ""}`}
       data-column-id={cell.column.id}
       data-cell-type={isNumeric ? "numeric" : "text"}
+      style={{
+        width: `${columnSize}px`,
+        minWidth: `${cell.column.columnDef.minSize}px`,
+        maxWidth: `${cell.column.columnDef.maxSize}px`,
+        boxSizing: "border-box",
+      }}
     >
-      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+      <div className="truncate w-full pl-2">
+        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+      </div>
     </td>
   );
 }

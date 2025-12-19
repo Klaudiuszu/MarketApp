@@ -17,7 +17,7 @@ export default function BlotterHeader<TData>({
   customHeaderRenderers = {},
 }: BlotterHeaderProps<TData>) {
   return (
-    <thead className="bg-gray-800 sticky top-0 z-10">
+    <thead className="bg-gray-800">
       {table.getHeaderGroups().map((headerGroup) => (
         <tr key={headerGroup.id}>
           {headerGroup.headers.map((header, index) => (
@@ -51,6 +51,7 @@ function HeaderCell({
   if (header.isPlaceholder) return null;
 
   const columnId = header.column.id;
+  const columnSize = header.column.getSize();
   const defaultHeaderContent = flexRender(
     header.column.columnDef.header,
     header.getContext()
@@ -64,14 +65,20 @@ function HeaderCell({
 
   return (
     <th
+      key={header.id}
       colSpan={header.colSpan}
       className={`pt-2 pb-0 align-bottom border-b border-gray-700 ${
         !isLast ? "border-r border-gray-700" : ""
-      } ${canFilter ? "h-[70px]" : "h-[46px]"}`}
+      } ${canFilter ? "h-[70px]" : "h-[46px]"} px-0`}
+      style={{
+        width: `${columnSize}px`,
+        minWidth: `${header.column.columnDef.minSize}px`,
+        maxWidth: `${header.column.columnDef.maxSize}px`,
+      }}
     >
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full w-full">
         <div className="flex items-center justify-between mb-1">
-          <div className="px-2 select-none font-medium text-gray-200 text-[12px] leading-tight uppercase tracking-wider truncate">
+          <div className="select-none font-medium text-gray-200 text-[12px] leading-tight uppercase tracking-wider truncate w-full">
             {headerContent}
           </div>
           <div className="flex items-center ml-1">
