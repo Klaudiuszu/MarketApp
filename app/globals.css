@@ -496,3 +496,11 @@ th,
 td {
   box-sizing: border-box;
 }
+:root {
+  --blotter-loader-color: #a1a1aa;
+}
+
+.p-progress-spinner-circle {
+  stroke: var(--blotter-loader-color);
+  opacity: 0.65;
+}

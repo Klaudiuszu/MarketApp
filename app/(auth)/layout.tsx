@@ -15,7 +15,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         <Link href="/" className="auth-logo">
           <Image
             src="/assets/icons/logo.svg"
-            alt="Signalist logo"
+            alt="Assets logo"
             width={140}
             height={32}
             className="h-8 w-auto"
@@ -28,13 +28,14 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
       <section className="auth-right-section">
         <div className="z-10 relative lg:mt-4 lg:mb-16">
           <blockquote className="auth-blockquote">
-            Signalist turned my watchlist into a winning list. The alerts are
-            spot-on, and I feel more confident making moves in the market
+            This App allow to FM to invest smarter and faster. They can see
+            Order Intentions in real-time, helping them make better decisions
+            and get ahead in the market.
           </blockquote>
           <div className="flex items-center justify-between">
             <div>
-              <cite className="auth-testimonial-author">- Ethan R.</cite>
-              <p className="max-md:text-xs text-gray-500">Retail Investor</p>
+              <cite className="auth-testimonial-author">- Klaudiusz P.</cite>
+              <p className="max-md:text-xs text-gray-500">Fund Managers</p>
             </div>
             <div className="flex items-center gap-0.5">
               {[1, 2, 3, 4, 5].map((star) => (

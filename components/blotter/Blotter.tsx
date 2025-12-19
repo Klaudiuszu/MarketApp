@@ -1,6 +1,7 @@
 "use client";
 
 import { Table } from "@tanstack/react-table";
+import { Loader } from "../ui/blotter/Loader";
 import BlotterBody from "./BlotterBody";
 import BlotterControlBar from "./BlotterControlBar";
 import BlotterHeader from "./BlotterHeader";
@@ -10,6 +11,7 @@ export type BlotterProps<TData> = {
   table: Table<TData>;
   title?: string;
   status?: ApiStatus;
+  loading?: boolean;
   customCellRenderers?: Record<
     string,
     (value: any, row: TData) => React.ReactNode
@@ -42,6 +44,7 @@ export default function Blotter<TData>({
   table,
   title = "Blotter",
   status = ApiStatus.UNKNOWN,
+  loading = false,
   className = "",
   zebraStriping = {
     enabled: true,
@@ -51,26 +54,21 @@ export default function Blotter<TData>({
 }: BlotterProps<TData>) {
   return (
     <div
-      className={`w-full h-[600px] overflow-auto border rounded-md bg-gray-900 border-gray-700 shadow-sm text-gray-200 ${className}`}
+      className={`relative w-full h-[600px] border rounded-md bg-gray-900 border-gray-700 shadow-sm text-gray-200 ${className}`}
     >
       <div className="sticky top-0 z-20 bg-gray-900 border-b border-gray-700">
         <BlotterControlBar title={title} status={status} />
-        <div className="overflow-hidden">
-          <table
-            className="min-w-full table-fixed text-sm"
-            style={{ tableLayout: "fixed" }}
-          >
-            <BlotterHeader table={table} />
-          </table>
-        </div>
-      </div>
-      <div className="overflow-auto">
-        <table
-          className="min-w-full table-fixed text-sm"
-          style={{ tableLayout: "fixed" }}
-        >
-          <BlotterBody table={table} zebraStriping={zebraStriping} />
+        <table className="min-w-full table-fixed text-sm">
+          <BlotterHeader table={table} />
         </table>
+      </div>
+      <div className="relative h-[calc(100%-96px)] overflow-auto">
+        {!loading && (
+          <table className="min-w-full table-fixed text-sm">
+            <BlotterBody table={table} zebraStriping={zebraStriping} />
+          </table>
+        )}
+        {loading && <Loader />}
       </div>
     </div>
   );
