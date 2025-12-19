@@ -15,8 +15,6 @@ export default function ColumnFilterInput({ column }: ColumnFilterInputProps) {
 
   const value = column.getFilterValue() ?? "";
 
-  console.log({ value });
-
   return (
     <div className="w-full">
       <div className="relative">

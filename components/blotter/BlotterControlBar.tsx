@@ -36,9 +36,6 @@ export default function BlotterControlBar({
               className={`inline-flex w-3 h-3 rounded-full ${statusColor}`}
               aria-hidden
             />
-            {status === "online" && (
-              <span className="absolute top-0 left-0 w-3 h-3 bg-green-400 rounded-full animate-ping opacity-75" />
-            )}
           </div>
         </div>
         <div className="h-4 w-px bg-gray-700" />
