@@ -1,8 +1,7 @@
 "use client";
 
-import { Table, flexRender } from "@tanstack/react-table";
-import ColumnSortButton from "../ui/blotter/ColumnSortButton";
-import ColumnFilterInput from "./filters/ColumnFilterInput";
+import { Table } from "@tanstack/react-table";
+import HeaderCell from "./HeaderCell";
 
 export type BlotterHeaderProps<TData> = {
   table: Table<TData>;
@@ -12,10 +11,10 @@ export type BlotterHeaderProps<TData> = {
 /**
  * BlotterHeader - Renders the table header with column titles, filters, and sort buttons
  */
-export default function BlotterHeader<TData>({
+const BlotterHeader = <TData,>({
   table,
   customHeaderRenderers = {},
-}: BlotterHeaderProps<TData>) {
+}: BlotterHeaderProps<TData>) => {
   return (
     <thead className="bg-gray-800">
       {table.getHeaderGroups().map((headerGroup) => (
@@ -32,63 +31,6 @@ export default function BlotterHeader<TData>({
       ))}
     </thead>
   );
-}
-
-type HeaderCellProps = {
-  header: any;
-  isLast: boolean;
-  customHeaderRenderers: Record<string, (header: string) => React.ReactNode>;
 };
 
-/**
- * HeaderCell - Individual header cell component with filter and sort controls
- */
-function HeaderCell({
-  header,
-  isLast,
-  customHeaderRenderers,
-}: HeaderCellProps) {
-  if (header.isPlaceholder) return null;
-
-  const columnId = header.column.id;
-  const columnSize = header.column.getSize();
-  const defaultHeaderContent = flexRender(
-    header.column.columnDef.header,
-    header.getContext()
-  );
-
-  const headerContent = customHeaderRenderers[columnId]
-    ? customHeaderRenderers[columnId](defaultHeaderContent as string)
-    : defaultHeaderContent;
-
-  const canFilter = header.column.getCanFilter();
-
-  return (
-    <th
-      key={header.id}
-      colSpan={header.colSpan}
-      className={`pt-2 pb-0 align-bottom border-b border-gray-700 ${
-        !isLast ? "border-r border-gray-700" : ""
-      } ${canFilter ? "h-[70px]" : "h-[46px]"} px-0`}
-      style={{
-        width: `${columnSize}px`,
-        minWidth: `${header.column.columnDef.minSize}px`,
-        maxWidth: `${header.column.columnDef.maxSize}px`,
-      }}
-    >
-      <div className="flex flex-col h-full w-full">
-        <div className="flex items-center justify-between mb-1">
-          <div className="select-none font-medium text-gray-200 text-[12px] leading-tight uppercase tracking-wider truncate w-full">
-            {headerContent}
-          </div>
-          <div className="flex items-center ml-1">
-            <ColumnSortButton column={header.column} />
-          </div>
-        </div>
-        <div className={`w-full ${canFilter ? "mt-auto" : "hidden"}`}>
-          <ColumnFilterInput column={header.column} />
-        </div>
-      </div>
-    </th>
-  );
-}
+export default BlotterHeader;
