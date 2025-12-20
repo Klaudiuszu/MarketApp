@@ -1,5 +1,8 @@
 import { ApiStatus } from "@/components/blotter/constants";
-import { IOrderIntentionsType } from "@/database/mocks/orderIntentionsMock";
+import {
+  IOrderIntentionsType,
+  OrderIntentionsArraySchema,
+} from "@/lib/schemas";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
@@ -21,12 +24,13 @@ export const getData = async ({
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+    const jsonData = await response.json();
+    const validatedData = OrderIntentionsArraySchema.parse(jsonData);
 
-    const data: IOrderIntentionsType[] = await response.json();
     setStatus(ApiStatus.ONLINE);
-    setData(Array.isArray(data) ? data : []);
+    setData(Array.isArray(validatedData) ? validatedData : []);
 
-    return data;
+    return validatedData;
   } catch (error) {
     setStatus(ApiStatus.ERROR);
     console.error("Error fetching orders:", error);

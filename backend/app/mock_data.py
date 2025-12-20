@@ -1,4 +1,4 @@
-from models import OrderIntention, Side, OrderType, Status, TimeInForce
+from app.models import OrderIntention, Side, OrderType, Status, TimeInForce
 
 MOCK_ORDERS = [
     OrderIntention(

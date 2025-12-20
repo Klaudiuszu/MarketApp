@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models import OrderIntention
-from mock_data import MOCK_ORDERS
+from app.models import OrderIntention
+from app.mock_data import MOCK_ORDERS
 
 app = FastAPI(
     title="Trading Blotter API",
