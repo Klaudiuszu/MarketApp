@@ -1,26 +1,10 @@
 import { ApiStatus } from "@/components/ui/blotter/constants";
+import { toastService } from "@/lib/toastService";
+import { UseFetchDataOptions, UseFetchDataReturn } from "@/types/global";
 import { useCallback, useEffect, useState } from "react";
-import { ZodSchema } from "zod";
+import { ZodError } from "zod";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
-
-interface UseFetchDataOptions<T> {
-  endpoint: string;
-  schema: ZodSchema<T[]>;
-  initialData?: T[];
-  enableDelay?: boolean;
-  delayMs?: number;
-  autoFetch?: boolean;
-}
-
-interface UseFetchDataReturn<T> {
-  data: T[];
-  status: ApiStatus;
-  loading: boolean;
-  error: string | null;
-  fetchData: () => Promise<T[]>;
-  setData: React.Dispatch<React.SetStateAction<T[]>>;
-}
 
 export function useFetchData<T>({
   endpoint,
@@ -50,22 +34,30 @@ export function useFetchData<T>({
       const [_, response] = await Promise.all([delayPromise, fetchPromise]);
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP ${response.status} – ${response.statusText}`);
       }
 
       const jsonData = await response.json();
-
       const validatedData = schema.parse(jsonData);
 
       setData(validatedData);
       setStatus(ApiStatus.ONLINE);
       return validatedData;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "Unknown error occurred";
-      setError(errorMessage);
+      let message = "Unknown error occurred";
+
+      if (err instanceof ZodError) {
+        message = "API response schema mismatch";
+      } else if (err instanceof Error) {
+        message = err.message;
+      }
+
+      setError(message);
       setStatus(ApiStatus.ERROR);
       setData([]);
+
+      toastService.error("Data fetch error", `${endpoint}: ${message}`);
+
       throw err;
     } finally {
       setLoading(false);

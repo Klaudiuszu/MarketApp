@@ -18,7 +18,6 @@ import "primereact/resources/themes/lara-dark-blue/theme.css";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth.api.getSession({ headers: await headers() });
-
   if (!session?.user) redirect("/sign-in");
 
   const user = {

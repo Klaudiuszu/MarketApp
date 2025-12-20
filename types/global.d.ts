@@ -217,4 +217,24 @@ declare global {
   };
 }
 
+import { ZodSchema } from "zod";
+
+export interface UseFetchDataOptions<T> {
+  endpoint: string;
+  schema: ZodSchema<T[]>;
+  initialData?: T[];
+  enableDelay?: boolean;
+  delayMs?: number;
+  autoFetch?: boolean;
+}
+
+import { ApiStatus } from "@/components/ui/blotter/constants";
+export interface UseFetchDataReturn<T> {
+  data: T[];
+  status: ApiStatus;
+  loading: boolean;
+  error: string | null;
+  fetchData: () => Promise<T[]>;
+  setData: React.Dispatch<React.SetStateAction<T[]>>;
+}
 export {};

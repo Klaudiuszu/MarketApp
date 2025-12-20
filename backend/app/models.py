@@ -23,6 +23,7 @@ class TimeInForce(str, Enum):
     
 class OrderIntention(BaseModel):
     id: str
+    newIssueId: str
     symbol: str
     side: Side
     quantity: float

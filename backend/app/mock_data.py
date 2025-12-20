@@ -3,6 +3,7 @@ from app.models import OrderIntention, Side, OrderType, Status, TimeInForce
 MOCK_ORDERS = [
     OrderIntention(
         id="ORD-001",
+        newIssueId="ISS-006",
         symbol="AAPL",
         side=Side.BUY,
         quantity=100,
@@ -17,6 +18,7 @@ MOCK_ORDERS = [
     ),
     OrderIntention(
         id="ORD-002",
+        newIssueId="ISS-006",
         symbol="MSFT",
         side=Side.SELL,
         quantity=50,
@@ -31,6 +33,7 @@ MOCK_ORDERS = [
     ),
     OrderIntention(
         id="ORD-003",
+        newIssueId="ISS-006",
         symbol="GOOGL",
         side=Side.BUY,
         quantity=75,
@@ -45,6 +48,7 @@ MOCK_ORDERS = [
     ),
     OrderIntention(
         id="ORD-004",
+        newIssueId="ISS-001",
         symbol="TSLA",
         side=Side.SELL,
         quantity=200,
@@ -58,6 +62,7 @@ MOCK_ORDERS = [
     ),
     OrderIntention(
         id="ORD-005",
+        newIssueId="ISS-001",
         symbol="AMZN",
         side=Side.BUY,
         quantity=150,

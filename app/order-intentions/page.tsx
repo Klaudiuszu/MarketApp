@@ -9,16 +9,20 @@ import {
   IOrderIntentionsType,
   OrderIntentionsArraySchema,
 } from "@/lib/schemas/orderIntentionSchema";
+import { toastService } from "@/lib/toastService";
 import {
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Toast } from "primereact/toast";
+import { useEffect, useRef } from "react";
 import Blotter from "../../components/ui/blotter/Blotter";
 import { tanColumns } from "./OrderIntentionView/tanColumns";
 
 const OrderIntentions = () => {
+  const toastRef = useRef<Toast>(null);
   const {
     data: ordersData,
     status: ordersStatus,
@@ -52,6 +56,10 @@ const OrderIntentions = () => {
     columnResizeMode: "onChange",
   });
 
+  useEffect(() => {
+    toastService.register(toastRef as React.RefObject<Toast>);
+  }, []);
+
   return (
     <div className="flex flex-1 min-h-0 overflow-hidden">
       <div className="w-[300px] shrink-0 min-h-0">
@@ -69,6 +77,7 @@ const OrderIntentions = () => {
           status={ordersStatus}
         />
       </div>
+      <Toast ref={toastRef} position="bottom-left" />
     </div>
   );
 };
