@@ -1,9 +1,9 @@
 "use client";
 
-import { DefaultCellRenderer } from "@/components/blotter/cellRenderers";
-import { CurrencyCellRenderer } from "@/components/blotter/cellRenderers/CurrencyCellRenderer";
-import { SideCellRenderer } from "@/components/blotter/cellRenderers/SideCellRenderer";
-import { IOrderIntentionsType } from "@/lib/schemas";
+import { DefaultCellRenderer } from "@/components/ui/blotter/cellRenderers";
+import { CurrencyCellRenderer } from "@/components/ui/blotter/cellRenderers/CurrencyCellRenderer";
+import { SideCellRenderer } from "@/components/ui/blotter/cellRenderers/SideCellRenderer";
+import { IOrderIntentionsType } from "@/lib/schemas/orderIntentionSchema";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const tanColumns: ColumnDef<IOrderIntentionsType>[] = [

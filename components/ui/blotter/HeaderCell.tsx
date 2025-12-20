@@ -1,7 +1,7 @@
 "use client";
 
 import { flexRender, Header } from "@tanstack/react-table";
-import ColumnSortButton from "../ui/blotter/ColumnSortButton";
+import ColumnSortButton from "./ColumnSortButton";
 import ColumnFilterInput from "./filters/ColumnFilterInput";
 
 export type HeaderCellProps<TData> = {

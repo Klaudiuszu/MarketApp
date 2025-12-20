@@ -1,25 +1,49 @@
 "use client";
-
-import Blotter from "@/components/blotter/Blotter";
-import { ApiStatus } from "@/components/blotter/constants";
-import { IOrderIntentionsType } from "@/lib/schemas";
-import { getData } from "@/utils/getData";
+import { useFetchData } from "@/components/hooks/useFetchData";
+import SidePanel from "@/components/ui/SidePanel";
+import {
+  INewIssueType,
+  NewIssuesArraySchema,
+} from "@/lib/schemas/NewIssueSchema";
+import {
+  IOrderIntentionsType,
+  OrderIntentionsArraySchema,
+} from "@/lib/schemas/orderIntentionSchema";
 import {
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import Blotter from "../../components/ui/blotter/Blotter";
 import { tanColumns } from "./OrderIntentionView/tanColumns";
 
 const OrderIntentions = () => {
-  const [data, setData] = useState<IOrderIntentionsType[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [status, setStatus] = useState<ApiStatus>(ApiStatus.UNKNOWN);
+  const {
+    data: ordersData,
+    status: ordersStatus,
+    loading: ordersLoading,
+    fetchData: fetchOrders,
+  } = useFetchData<IOrderIntentionsType>({
+    endpoint: "/api/orders",
+    schema: OrderIntentionsArraySchema,
+    enableDelay: true,
+    delayMs: 3000,
+  });
+  const {
+    data: issuesData,
+    status: issuesStatus,
+    loading: issuesLoading,
+    fetchData: fetchIssues,
+  } = useFetchData<INewIssueType>({
+    endpoint: "/api/issues",
+    schema: NewIssuesArraySchema,
+    enableDelay: true,
+    delayMs: 1000,
+  });
 
   const table = useReactTable({
-    data,
+    data: ordersData,
     columns: tanColumns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -27,19 +51,25 @@ const OrderIntentions = () => {
     enableColumnResizing: true,
     columnResizeMode: "onChange",
   });
-  useEffect(() => {
-    getData({ setData, setStatus }).finally(() => setLoading(false));
-  }, []);
 
   return (
-    <main className="p-4">
-      <Blotter
-        table={table}
-        title="Order Intentions"
-        loading={loading}
-        status={status}
-      />
-    </main>
+    <div className="flex flex-1 min-h-0 overflow-hidden">
+      <div className="w-[300px] shrink-0 min-h-0">
+        <SidePanel
+          title="All New Issues"
+          status={issuesStatus}
+          data={issuesData}
+        />
+      </div>
+      <div className="flex-1 min-h-0 p-1">
+        <Blotter
+          table={table}
+          title="Order Intentions"
+          loading={ordersLoading}
+          status={ordersStatus}
+        />
+      </div>
+    </div>
   );
 };
 

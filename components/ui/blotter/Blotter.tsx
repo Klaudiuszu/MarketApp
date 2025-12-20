@@ -1,11 +1,11 @@
 "use client";
 
 import { Table } from "@tanstack/react-table";
-import { Loader } from "../ui/blotter/Loader";
 import BlotterBody from "./BlotterBody";
 import BlotterControlBar from "./BlotterControlBar";
 import BlotterHeader from "./BlotterHeader";
 import { ApiStatus } from "./constants";
+import { Loader } from "./Loader";
 
 export type BlotterProps<TData> = {
   table: Table<TData>;
@@ -54,7 +54,7 @@ export default function Blotter<TData>({
 }: BlotterProps<TData>) {
   return (
     <div
-      className={`relative w-full h-[600px] border rounded-md bg-gray-900 border-gray-700 shadow-sm text-gray-200 ${className}`}
+      className={`relative w-full h-[600px] border bg-gray-900 border-gray-700 shadow-sm text-gray-200 ${className}`}
     >
       <div className="sticky top-0 z-20 bg-gray-900 border-b border-gray-700">
         <BlotterControlBar title={title} status={status} />
