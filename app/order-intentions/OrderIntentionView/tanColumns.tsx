@@ -3,7 +3,7 @@
 import { DefaultCellRenderer } from "@/components/blotter/cellRenderers";
 import { CurrencyCellRenderer } from "@/components/blotter/cellRenderers/CurrencyCellRenderer";
 import { SideCellRenderer } from "@/components/blotter/cellRenderers/SideCellRenderer";
-import { IOrderIntentionsType } from "@/database/mocks/orderIntentionsMock";
+import { IOrderIntentionsType } from "@/lib/schemas";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const tanColumns: ColumnDef<IOrderIntentionsType>[] = [

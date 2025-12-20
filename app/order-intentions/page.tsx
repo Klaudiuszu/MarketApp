@@ -2,7 +2,7 @@
 
 import Blotter from "@/components/blotter/Blotter";
 import { ApiStatus } from "@/components/blotter/constants";
-import { IOrderIntentionsType } from "@/database/mocks/orderIntentionsMock";
+import { IOrderIntentionsType } from "@/lib/schemas";
 import { getData } from "@/utils/getData";
 import {
   getCoreRowModel,
