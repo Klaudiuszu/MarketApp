@@ -1,8 +1,10 @@
+from http.client import HTTPException
 from typing import List
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.models import OrderIntention
+from app.models import Issue, OrderIntention
 from app.mock_data import MOCK_ORDERS
+from app.mock_issues import MOCK_ISSUES
 
 app = FastAPI(
     title="Trading Blotter API",
@@ -43,3 +45,15 @@ async def get_order(order_id: str):
         if order.id == order_id:
             return order
     return {"error": "Order not found"}
+
+@app.get("/api/issues", response_model=List[Issue])
+async def get_issues():
+    return MOCK_ISSUES
+
+
+@app.get("/api/issues/{issue_id}", response_model=Issue)
+async def get_issue(issue_id: str):
+    for issue in MOCK_ISSUES:
+        if issue.id == issue_id:
+            return issue
+    raise HTTPException(status_code=404, detail="Issue not found")
