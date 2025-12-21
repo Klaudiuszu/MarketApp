@@ -3,6 +3,7 @@
 import { ReactNode } from "react";
 import BlotterControlBar from "./blotter/BlotterControlBar";
 import { ApiStatus } from "./blotter/constants";
+import { Loader } from "./blotter/Loader";
 
 interface SidePanelProps {
   title: string;
@@ -11,6 +12,7 @@ interface SidePanelProps {
   children?: ReactNode;
   footerContent?: ReactNode;
   className?: string;
+  loading?: boolean;
 }
 
 export default function SidePanel({
@@ -20,6 +22,7 @@ export default function SidePanel({
   children,
   footerContent,
   className = "",
+  loading = false,
 }: SidePanelProps) {
   const formatDate = (dateString: string) =>
     new Date(dateString).toLocaleDateString("en-US", {
@@ -42,7 +45,9 @@ export default function SidePanel({
         <BlotterControlBar title={title} status={status} />
       </div>
       <div className="flex-1 min-h-0 overflow-y-auto">
-        {children ? (
+        {loading ? (
+          <Loader />
+        ) : children ? (
           children
         ) : data.length === 0 ? (
           <div className="text-gray-500 text-sm text-center py-8">

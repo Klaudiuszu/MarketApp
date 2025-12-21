@@ -27,7 +27,6 @@ const OrderIntentions = () => {
     data: ordersData,
     status: ordersStatus,
     loading: ordersLoading,
-    fetchData: fetchOrders,
   } = useFetchData<IOrderIntentionsType>({
     endpoint: "/api/orders",
     schema: OrderIntentionsArraySchema,
@@ -38,7 +37,6 @@ const OrderIntentions = () => {
     data: issuesData,
     status: issuesStatus,
     loading: issuesLoading,
-    fetchData: fetchIssues,
   } = useFetchData<INewIssueType>({
     endpoint: "/api/issues",
     schema: NewIssuesArraySchema,
@@ -67,6 +65,7 @@ const OrderIntentions = () => {
           title="All New Issues"
           status={issuesStatus}
           data={issuesData}
+          loading={issuesLoading}
         />
       </div>
       <div className="flex-1 min-h-0 p-1">
