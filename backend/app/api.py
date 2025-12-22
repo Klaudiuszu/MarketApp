@@ -39,12 +39,13 @@ async def get_orders():
     return MOCK_ORDERS
 
 
-@app.get("/api/orders/{order_id}", response_model=OrderIntention)
-async def get_order(order_id: str):
-    for order in MOCK_ORDERS:
-        if order.id == order_id:
-            return order
-    return {"error": "Order not found"}
+@app.get("/api/orders/{new_issue_id}", response_model=List[OrderIntention])
+async def get_orders_by_new_issue_id(new_issue_id: str):
+    filtered_orders = [order for order in MOCK_ORDERS if order.newIssueId == new_issue_id]
+    
+    if not filtered_orders:
+        return []    
+    return filtered_orders
 
 @app.get("/api/issues", response_model=List[Issue])
 async def get_issues():

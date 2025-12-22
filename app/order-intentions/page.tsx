@@ -16,22 +16,30 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useAtom } from "jotai";
 import { Toast } from "primereact/toast";
 import { useEffect, useRef } from "react";
 import Blotter from "../../components/ui/blotter/Blotter";
 import { tanColumns } from "./OrderIntentionView/tanColumns";
+import { atomSelectedNewIssueID } from "./atoms/atomOrderIntention";
 
 const OrderIntentions = () => {
   const toastRef = useRef<Toast>(null);
+  const [selectedNewIssueID, setSelectedNewIssueID] = useAtom(
+    atomSelectedNewIssueID
+  );
+
   const {
     data: ordersData,
     status: ordersStatus,
     loading: ordersLoading,
   } = useFetchData<IOrderIntentionsType>({
-    endpoint: "/api/orders",
+    endpoint: selectedNewIssueID
+      ? `/api/orders/${selectedNewIssueID}`
+      : "/api/orders",
     schema: OrderIntentionsArraySchema,
     enableDelay: true,
-    delayMs: 3000,
+    delayMs: 1000,
   });
   const {
     data: issuesData,
@@ -45,7 +53,7 @@ const OrderIntentions = () => {
   });
 
   const table = useReactTable({
-    data: ordersData,
+    data: ordersData ?? [],
     columns: tanColumns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -66,6 +74,8 @@ const OrderIntentions = () => {
           status={issuesStatus}
           data={issuesData}
           loading={issuesLoading}
+          selectedId={selectedNewIssueID}
+          onSelect={setSelectedNewIssueID}
         />
       </div>
       <div className="flex-1 min-h-0 p-1">

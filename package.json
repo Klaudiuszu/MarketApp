@@ -22,6 +22,8 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "inngest": "^3.48.0",
+    "jotai": "^2.16.0",
+    "loadash": "^1.0.0",
     "lucide-react": "^0.553.0",
     "mogodb": "^0.0.1-security",
     "mongoose": "^9.0.0",
