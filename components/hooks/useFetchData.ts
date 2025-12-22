@@ -42,6 +42,11 @@ export function useFetchData<T>({
 
       setData(validatedData);
       setStatus(ApiStatus.ONLINE);
+
+      if (validatedData.length === 0) {
+        setStatus(ApiStatus.ONLINE);
+      }
+
       return validatedData;
     } catch (err) {
       let message = "Unknown error occurred";

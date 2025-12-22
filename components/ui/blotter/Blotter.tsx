@@ -12,6 +12,8 @@ export type BlotterProps<TData> = {
   title?: string;
   status?: ApiStatus;
   loading?: boolean;
+  onRefresh?: () => void;
+  storageKey?: string;
   customCellRenderers?: Record<
     string,
     (value: any, row: TData) => React.ReactNode
@@ -32,11 +34,12 @@ export type BlotterProps<TData> = {
  * @template TData Type of a single table row
  *
  * @param table TanStack Table instance controlling state and data
+ * @param onRefresh Callback for refresh button click
+ * @param storageKey Key for localStorage to save column order
  * @param customCellRenderers Optional cell renderers mapped by column ID
  * @param customHeaderRenderers Optional header renderers mapped by column ID
  * @param zebraStriping Optional configuration for alternating row styles
  * @param className Optional CSS class applied to the root container
- * @param footerContent Optional custom content rendered in the footer
  *
  * @returns A styled, scrollable table component with optional customization
  */
@@ -45,6 +48,8 @@ export default function Blotter<TData>({
   title = "Blotter",
   status = ApiStatus.UNKNOWN,
   loading = false,
+  onRefresh,
+  storageKey,
   className = "",
   zebraStriping = {
     enabled: true,
@@ -57,7 +62,13 @@ export default function Blotter<TData>({
       className={`relative w-full h-[600px] border bg-gray-900 border-gray-700 shadow-sm text-gray-200 ${className}`}
     >
       <div className="sticky top-0 z-20 bg-gray-900 border-b border-gray-700">
-        <BlotterControlBar title={title} status={status} />
+        <BlotterControlBar
+          title={title}
+          status={status}
+          table={table}
+          storageKey={storageKey}
+          onRefresh={onRefresh}
+        />
         <table className="min-w-full table-fixed text-sm">
           <BlotterHeader table={table} />
         </table>

@@ -1,49 +1,49 @@
 "use client";
 
+import { useColumnOrder } from "@/components/hooks/useColumnOrder";
+import { Table } from "@tanstack/react-table";
 import { ApiStatus } from "./constants";
+import { ControlButtons } from "./ControlButtons";
+import { StatusIndicator } from "./StatusIndicator";
+import { TitleSection } from "./TitleSection";
 
-type BlotterControlBarProps = {
+type BlotterControlBarProps<T> = {
   title?: string;
   status?: ApiStatus;
   className?: string;
   children?: React.ReactNode;
+  table?: Table<T>;
+  storageKey?: string;
+  onRefresh?: () => void;
 };
 
-export default function BlotterControlBar({
+export default function BlotterControlBar<T>({
   title = "Blotter",
   status = ApiStatus.UNKNOWN,
   className = "",
   children,
-}: BlotterControlBarProps) {
-  const statusColor =
-    status === ApiStatus.ONLINE
-      ? "bg-green-400"
-      : status === ApiStatus.OFFLINE
-      ? "bg-red-500"
-      : status === ApiStatus.PENDING
-      ? "bg-blue-400"
-      : "bg-gray-500";
+  table,
+  storageKey,
+  onRefresh,
+}: BlotterControlBarProps<T>) {
+  const { handleColumnOrderChange, handleResetOrder } = useColumnOrder(table, {
+    storageKey,
+  });
 
   return (
     <div
-      className={`flex items-center justify-between px-3 py-2 border-b border-gray-700/60 bg-gray-900 ${className}`}
+      className={`flex items-center justify-between px-3 py-2 border-b border-gray-700 bg-gray-900 ${className}`}
       data-testid="blotter-control-bar"
     >
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          <div className="relative">
-            <span
-              className={`inline-flex w-3 h-3 rounded-full ${statusColor}`}
-              aria-hidden
-            />
-          </div>
-        </div>
-        <div className="h-4 w-px bg-gray-700" />
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-gray-200">{title}</span>
-        </div>
+      <TitleSection title={title} status={<StatusIndicator status={status} />}>
         {children}
-      </div>
+      </TitleSection>
+      <ControlButtons
+        table={table}
+        onColumnOrderChange={handleColumnOrderChange}
+        onResetOrder={handleResetOrder}
+        onRefresh={onRefresh}
+      />
     </div>
   );
 }

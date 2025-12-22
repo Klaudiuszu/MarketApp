@@ -1,3 +1,4 @@
+// app/order-intentions/page.tsx
 "use client";
 import { useFetchData } from "@/components/hooks/useFetchData";
 import SidePanel from "@/components/ui/SidePanel";
@@ -18,7 +19,7 @@ import {
 } from "@tanstack/react-table";
 import { useAtom } from "jotai";
 import { Toast } from "primereact/toast";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Blotter from "../../components/ui/blotter/Blotter";
 import { tanColumns } from "./OrderIntentionView/tanColumns";
 import { atomSelectedNewIssueID } from "./atoms/atomOrderIntention";
@@ -33,14 +34,15 @@ const OrderIntentions = () => {
     data: ordersData,
     status: ordersStatus,
     loading: ordersLoading,
+    fetchData: fetchOrders,
   } = useFetchData<IOrderIntentionsType>({
-    endpoint: selectedNewIssueID
-      ? `/api/orders/${selectedNewIssueID}`
-      : "/api/orders",
+    endpoint: selectedNewIssueID ? `/api/orders/${selectedNewIssueID}` : "",
     schema: OrderIntentionsArraySchema,
     enableDelay: true,
     delayMs: 1000,
+    autoFetch: !!selectedNewIssueID,
   });
+
   const {
     data: issuesData,
     status: issuesStatus,
@@ -61,6 +63,15 @@ const OrderIntentions = () => {
     enableColumnResizing: true,
     columnResizeMode: "onChange",
   });
+
+  const handleRefresh = useCallback(async () => {
+    try {
+      await fetchOrders();
+      toastService.success("Data refreshed", "Order data has been updated");
+    } catch (error) {
+      console.error("Refresh failed:", error);
+    }
+  }, [fetchOrders]);
 
   useEffect(() => {
     toastService.register(toastRef as React.RefObject<Toast>);
@@ -84,6 +95,8 @@ const OrderIntentions = () => {
           title="Order Intentions"
           loading={ordersLoading}
           status={ordersStatus}
+          onRefresh={handleRefresh}
+          storageKey="order_intentions_column_order"
         />
       </div>
       <Toast ref={toastRef} position="bottom-left" />
