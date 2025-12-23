@@ -1,4 +1,3 @@
-// components/blotter/cellRenderers/defaultCellRenderer.tsx
 "use client";
 
 /**

@@ -37,13 +37,13 @@ const HeaderCell = <TData,>({
     <th
       key={header.id}
       colSpan={header.colSpan}
-      className={`pt-2 pb-0 align-bottom border-b border-gray-700 ${
+      className={`px-3 py-2 border-gray-700 ${
         !isLast ? "border-r border-gray-700" : ""
       } ${canFilter ? "h-[70px]" : "h-[46px]"} px-0`}
       style={{
-        width: `${columnSize}px`,
-        minWidth: `${header.column.columnDef.minSize}px`,
-        maxWidth: `${header.column.columnDef.maxSize}px`,
+        width: columnSize,
+        minWidth: header.column.columnDef.minSize,
+        maxWidth: header.column.columnDef.maxSize,
       }}
     >
       <div className="flex flex-col h-full w-full">

@@ -50,7 +50,7 @@ export default function SidePanel({
         ${className}
       `}
     >
-      <div className="shrink-0 border-b border-gray-700">
+      <div className=" bg-gray-900 border border-gray-700 overflow-hidden flex flex-col">
         <BlotterControlBar title={title} status={status} />
       </div>
 
@@ -128,7 +128,7 @@ export default function SidePanel({
         )}
       </div>
 
-      <div className="shrink-0 border-t border-gray-800 px-3 py-2">
+      <div className="shrink-0 border-b border-gray-800 px-3 py-2">
         {footerContent ?? (
           <div className="text-xs text-gray-500 text-center">
             {data.length} issues • Trading Desk

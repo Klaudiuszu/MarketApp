@@ -29,7 +29,7 @@ export default function BlotterBody<TData>({
       <tbody>
         <tr>
           <td
-            className="px-3 py-4 text-center text-gray-400 border-b border-gray-700"
+            className="px-3 py-2 text-center text-gray-400 border-b border-gray-700"
             colSpan={table.getAllLeafColumns().length}
           >
             No data available
@@ -101,31 +101,41 @@ type TableCellProps<TData> = {
 /**
  * TableCell - Individual table cell component
  */
-function TableCell<TData>({
-  cell,
-  cellIndex,
-  totalCells,
-}: TableCellProps<TData>) {
+function TableCell<TData>({ cell }: TableCellProps<TData>) {
   const cellValue = cell.getValue();
   const isNumeric = typeof cellValue === "number";
   const columnSize = cell.column.getSize();
 
+  // Use a safe approach for width calculation
+  const width = columnSize && columnSize > 0 ? `${columnSize}px` : "auto";
+
   return (
     <td
       key={cell.id}
-      className={`py-1 text-[12px] whitespace-nowrap align-middle ${
+      className={`py-2 text-[12px] align-middle ${
         isNumeric ? "text-right" : "text-left"
-      } ${cellIndex < totalCells - 1 ? "border-r border-gray-700/60" : ""}`}
+      } border-r border-gray-700/60`}
       data-column-id={cell.column.id}
       data-cell-type={isNumeric ? "numeric" : "text"}
       style={{
-        width: `${columnSize}px`,
-        minWidth: `${cell.column.columnDef.minSize}px`,
-        maxWidth: `${cell.column.columnDef.maxSize}px`,
+        width,
+        minWidth: `${cell.column.columnDef.minSize || 80}px`,
+        maxWidth: `${cell.column.columnDef.maxSize || 300}px`,
         boxSizing: "border-box",
+        overflow: "hidden",
       }}
     >
-      <div className="truncate w-full pl-2">
+      <div
+        className={`px-3 ${isNumeric ? "pr-4" : ""} ${
+          cell.column.id === "createdAt" || cell.column.id === "strategy"
+            ? "whitespace-normal wrap-break-word"
+            : "whitespace-nowrap"
+        }`}
+        style={{
+          textOverflow: "ellipsis",
+          overflow: "hidden",
+        }}
+      >
         {flexRender(cell.column.columnDef.cell, cell.getContext())}
       </div>
     </td>

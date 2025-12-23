@@ -69,13 +69,13 @@ export default function Blotter<TData>({
           storageKey={storageKey}
           onRefresh={onRefresh}
         />
-        <table className="min-w-full table-fixed text-sm">
+        <table className="table-fixed w-full text-xs">
           <BlotterHeader table={table} />
         </table>
       </div>
       <div className="relative h-[calc(100%-96px)] overflow-auto">
         {!loading && (
-          <table className="min-w-full table-fixed text-sm">
+          <table className="table-fixed w-full text-xs">
             <BlotterBody table={table} zebraStriping={zebraStriping} />
           </table>
         )}

@@ -534,3 +534,21 @@ td {
 .p-dialog .p-dialog-content {
   padding-bottom: 0 !important;
 }
+
+td:has(.has-buy-cell) {
+  @apply bg-emerald-900/30 text-emerald-200;
+}
+
+td:has(.has-sell-cell) {
+  @apply bg-rose-900/30 text-rose-200;
+}
+
+.pi-replay:before {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.pi-sync:before {
+  font-size: 0.75rem !important;
+  line-height: 0.875rem;
+}

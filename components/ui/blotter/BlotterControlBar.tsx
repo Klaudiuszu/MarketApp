@@ -32,7 +32,7 @@ export default function BlotterControlBar<T>({
 
   return (
     <div
-      className={`flex items-center justify-between px-3 py-2 border-b border-gray-700 bg-gray-900 ${className}`}
+      className={`flex items-center justify-between px-3 py-2 border-b h-10 border-gray-700 bg-gray-900 ${className}`}
       data-testid="blotter-control-bar"
     >
       <TitleSection title={title} status={<StatusIndicator status={status} />}>
