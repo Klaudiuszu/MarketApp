@@ -1,4 +1,3 @@
-// app/order-intentions/page.tsx
 "use client";
 import { useFetchData } from "@/components/hooks/useFetchData";
 import SidePanel from "@/components/ui/SidePanel";
@@ -21,8 +20,9 @@ import { useAtom } from "jotai";
 import { Toast } from "primereact/toast";
 import { useCallback, useEffect, useRef } from "react";
 import Blotter from "../../components/ui/blotter/Blotter";
-import { tanColumns } from "./OrderIntentionView/tanColumns";
 import { atomSelectedNewIssueID } from "./atoms/atomOrderIntention";
+import SideRatioChart from "./OrderIntentionView/SideRatioChart";
+import { tanColumns } from "./OrderIntentionView/tanColumns";
 
 const OrderIntentions = () => {
   const toastRef = useRef<Toast>(null);
@@ -89,16 +89,37 @@ const OrderIntentions = () => {
           onSelect={setSelectedNewIssueID}
         />
       </div>
-      <div className="flex-1 min-h-0 p-1">
-        <Blotter
-          table={table}
-          title="Order Intentions"
-          loading={ordersLoading}
-          status={ordersStatus}
-          onRefresh={handleRefresh}
-          storageKey="order_intentions_column_order"
-        />
+      <div className="flex-1 flex flex-col min-h-0">
+        <div className="flex-1 min-h-0 p-1">
+          <div className="h-full bg-gray-900 border border-gray-700 rounded-lg overflow-hidden flex flex-col">
+            <Blotter
+              table={table}
+              title="Order Intentions"
+              loading={ordersLoading}
+              status={ordersStatus}
+              onRefresh={handleRefresh}
+              storageKey="order_intentions_column_order"
+            />
+          </div>
+        </div>
+        <div className="flex-1 min-h-0 p-1">
+          <div className="h-full bg-gray-900 border border-gray-700 rounded-lg overflow-hidden flex flex-col">
+            <div className="p-4 border-b border-gray-700 bg-gray-800">
+              <h2 className="text-xl font-semibold text-white">
+                Buy vs Sell Ratio
+              </h2>
+              <p className="text-gray-400 text-sm mt-1">
+                Proportion of BUY and SELL orders
+              </p>
+            </div>
+
+            <div className="flex-1 p-4 min-h-0">
+              <SideRatioChart ordersData={ordersData || []} />
+            </div>
+          </div>
+        </div>
       </div>
+
       <Toast ref={toastRef} position="bottom-left" />
     </div>
   );
