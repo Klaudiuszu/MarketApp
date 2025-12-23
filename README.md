@@ -2,10 +2,13 @@
 
 ### Frontend
 
-![Next.js](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg)
-![React](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg)
-![TypeScript](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg)
-![Tailwind](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg)
+![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
+![Tailwind](https://img.shields.io/badge/TailwindCSS-3-38BDF8?logo=tailwindcss&logoColor=white)
+![TanStack Table](https://img.shields.io/badge/TanStack_Table-v8-FF4154?logo=reacttable&logoColor=white)
+![Recharts](https://img.shields.io/badge/Recharts-Charts-22B5BF)
+![Jotai](https://img.shields.io/badge/Jotai-State-000000)
 
 - **Next.js 14** (App Router, React Server Components)
 - **TypeScript**
@@ -26,8 +29,9 @@
 
 ### Backend
 
-![FastAPI](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg)
-![PostgreSQL](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?logo=fastapi&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-85EA2D?logo=swagger&logoColor=black)
 
 - **FastAPI**
 - **Swagger / OpenAPI**
@@ -39,11 +43,10 @@
 
 ### Dev & Tooling
 
-![GitHub](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg)
-
-- ESLint + Prettier
-- Jest + React Testing Library
-- GitHub Actions (CI/CD)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-2088FF?logo=githubactions&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-Code_Quality-4B32C3?logo=eslint)
+![Prettier](https://img.shields.io/badge/Prettier-Formatting-F7B93E?logo=prettier&logoColor=black)
+![Jest](https://img.shields.io/badge/Jest-Testing-C21325?logo=jest&logoColor=white)
 
 ---
 
