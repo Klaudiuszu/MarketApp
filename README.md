@@ -1,36 +1,134 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 🛠️ Technologies
 
-## Getting Started
+### Frontend
 
-First, run the development server:
+![Next.js](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg)
+![React](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg)
+![TypeScript](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg)
+![Tailwind](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Next.js 14** (App Router, React Server Components)
+- **TypeScript**
+- **TanStack Table v8**
+  - virtualization
+  - column management
+  - client-side sorting & filtering
+- **Recharts**
+  - P&L, exposure and aggregate visualizations
+- **Jotai**
+  - global and local view state
+  - columns, sorting, selected issue
+- **Tailwind CSS**
+- **PrimeReact**
+- **Better Auth** (frontend authentication)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Backend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![FastAPI](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg)
+![PostgreSQL](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg)
 
-## Learn More
+- **FastAPI**
+- **Swagger / OpenAPI**
+- **PostgreSQL**
+- Backend-side filtering of **order intentions**
+- Explicit API contracts (OpenAPI)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Dev & Tooling
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+![GitHub](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg)
 
-## Deploy on Vercel
+- ESLint + Prettier
+- Jest + React Testing Library
+- GitHub Actions (CI/CD)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Flow: New Issue → Backend Filtering
+
+1. User selects a **New Issue** (frontend)
+2. The selected issue is stored in a **Jotai atom**
+3. A request is triggered to a **FastAPI endpoint**
+4. Backend:
+   - filters **order intentions** by issue
+   - returns pre-processed domain data
+5. Frontend:
+   - updates the TanStack Table
+   - preserves column configuration and sorting
+
+> The frontend **does not perform domain-level filtering** — business logic remains on the backend.
+
+---
+
+## Key Features
+
+### 1. Dynamic View Controller
+
+- Reusable `BlotterControlBar`
+- Height variants (compact / expanded)
+- Actions:
+  - Refresh
+  - Column Selector
+  - Reset Order
+  - Clear Sorting
+
+---
+
+### 2. Column System (TanStack Table)
+
+- Centralized `columns.ts` definition
+- Configuration includes:
+  - accessor
+  - cell renderer
+  - sizing (min / max / fixed)
+- Business logic lives **exclusively inside cell renderers**
+- Persistence:
+  - column order
+  - visibility
+  - sorting (localStorage)
+
+---
+
+### 3. Virtualized Tables
+
+- Optimized for very large datasets
+- Minimal re-rendering
+- Buy / Sell / P&L color coding
+- Client-side sort & filter (view-only)
+
+---
+
+### 4. Charts (Recharts)
+
+- Position aggregates
+- P&L over time
+- Exposure per instrument
+- Shared data source with tables
+
+---
+
+## Design Principles
+
+- **Backend = single source of truth**
+- Frontend focuses on:
+  - presentation
+  - interaction
+  - view configuration
+- No “magic logic” hidden in the UI
+- Data scalability over visual polish
+
+---
+
+## Status
+
+Actively developed  
+API documentation available via **Swagger UI**
+
+---
+
+## Dashboard Preview
+
+![Dashboard Preview](./public/assets/images/dashboard-image.png)
