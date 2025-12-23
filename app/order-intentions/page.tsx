@@ -1,5 +1,6 @@
 "use client";
 import { useFetchData } from "@/components/hooks/useFetchData";
+import BlotterControlBar from "@/components/ui/blotter/BlotterControlBar";
 import SidePanel from "@/components/ui/SidePanel";
 import {
   INewIssueType,
@@ -104,14 +105,10 @@ const OrderIntentions = () => {
         </div>
         <div className="flex-1 min-h-0 p-1">
           <div className="h-full bg-gray-900 border border-gray-700 rounded-lg overflow-hidden flex flex-col">
-            <div className="p-4 border-b border-gray-700 bg-gray-800">
-              <h2 className="text-xl font-semibold text-white">
-                Buy vs Sell Ratio
-              </h2>
-              <p className="text-gray-400 text-sm mt-1">
-                Proportion of BUY and SELL orders
-              </p>
-            </div>
+            <BlotterControlBar
+              title={"Order Side Ratio"}
+              status={ordersStatus}
+            />
 
             <div className="flex-1 p-4 min-h-0">
               <SideRatioChart ordersData={ordersData || []} />
