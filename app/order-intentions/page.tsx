@@ -95,7 +95,7 @@ const OrderIntentions = () => {
           <div className="h-full bg-gray-900 border border-gray-700 overflow-hidden flex flex-col">
             <Blotter
               table={table}
-              title="Order Intentions"
+              title="Trade Indications"
               loading={ordersLoading}
               status={ordersStatus}
               onRefresh={handleRefresh}

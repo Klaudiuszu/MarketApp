@@ -19,11 +19,12 @@ const Header = ({ user }: { user: User }): JSX.Element => {
       <div className="container header-wrapper">
         <Link href="/">
           <Image
-            src="/assets/icons/logo.svg"
-            alt="Signal Logo"
-            width={140}
-            height={32}
-            className="h-8 w-auto cursor-pointer"
+            src="/assets/icons/target-trend.svg"
+            alt="Investment Intent - Smart Trading Platform"
+            width={160}
+            height={36}
+            className="h-9 w-auto cursor-pointer"
+            priority
           />
         </Link>
         <nav className="hidden sm:block">

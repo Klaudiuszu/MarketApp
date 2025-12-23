@@ -29,7 +29,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
         <div className="z-10 relative lg:mt-4 lg:mb-16">
           <blockquote className="auth-blockquote">
             This App allow to FM to invest smarter and faster. They can see
-            Order Intentions in real-time, helping them make better decisions
+            Trade Indications in real-time, helping them make better decisions
             and get ahead in the market.
           </blockquote>
           <div className="flex items-center justify-between">

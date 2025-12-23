@@ -1,0 +1,20 @@
+<svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M5 28L15 18L25 22L35 10" stroke="url(#chartGradient)" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="5" cy="28" r="2" fill="#10B981"/>
+  <circle cx="15" cy="18" r="2" fill="#10B981"/>
+  <circle cx="25" cy="22" r="2" fill="#10B981"/>
+  <circle cx="35" cy="10" r="2" fill="#10B981"/>
+  <text x="50" y="24" font-family="'Segoe UI', system-ui, sans-serif" font-size="20" font-weight="600" fill="#E5E7EB">
+    Investment
+  </text>
+  <text x="50" y="38" font-family="'Segoe UI', system-ui, sans-serif" font-size="20" font-weight="300" fill="#9CA3AF">
+    Intent
+  </text>
+  
+  <defs>
+    <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6EE7B7"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+</svg>
