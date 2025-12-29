@@ -3,8 +3,10 @@
 import { DefaultCellRenderer } from "@/components/ui/blotter/cellRenderers";
 import { CurrencyCellRenderer } from "@/components/ui/blotter/cellRenderers/CurrencyCellRenderer";
 import { IOrderIntentionsType } from "@/lib/schemas/orderIntentionSchema";
+import { dateFilterFn } from "@/lib/utils/dateFilterUtils";
 import { ColumnDef } from "@tanstack/react-table";
 import { BuySellCellRenderer } from "../../../components/ui/blotter/cellRenderers/BuySellCellRenderer";
+import { DateRangeFilter } from "../../../components/ui/blotter/filters/DateRangeFilter";
 
 export const tanColumns: ColumnDef<IOrderIntentionsType>[] = [
   {
@@ -78,6 +80,7 @@ export const tanColumns: ColumnDef<IOrderIntentionsType>[] = [
     cell: ({ row }) => (
       <DefaultCellRenderer value={row.getValue("timeInForce")} />
     ),
+    enableColumnFilter: true,
     enableSorting: true,
     size: 80,
     minSize: 70,
@@ -90,6 +93,10 @@ export const tanColumns: ColumnDef<IOrderIntentionsType>[] = [
       <DefaultCellRenderer value={row.getValue("createdAt")} />
     ),
     enableSorting: true,
+    filterFn: dateFilterFn,
+    meta: {
+      filterComponent: DateRangeFilter,
+    },
     size: 180,
     minSize: 150,
     maxSize: 220,

@@ -11,6 +11,7 @@ import {
   OrderIntentionsArraySchema,
 } from "@/lib/schemas/orderIntentionSchema";
 import { toastService } from "@/lib/toastService";
+import { dateFilterFn } from "@/lib/utils/dateFilterUtils";
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -63,6 +64,9 @@ const OrderIntentions = () => {
     getFilteredRowModel: getFilteredRowModel(),
     enableColumnResizing: true,
     columnResizeMode: "onChange",
+    filterFns: {
+      dateFilterFn: dateFilterFn,
+    },
   });
 
   const handleRefresh = useCallback(async () => {

@@ -9,7 +9,6 @@ export type HeaderCellProps<TData> = {
   isLast: boolean;
   customHeaderRenderers?: Record<string, (header: string) => React.ReactNode>;
 };
-
 /**
  * HeaderCell - Individual header cell component with filter and sort controls
  */
@@ -37,9 +36,9 @@ const HeaderCell = <TData,>({
     <th
       key={header.id}
       colSpan={header.colSpan}
-      className={`px-3 py-2 border-gray-700 ${
+      className={`py-1 border-gray-700 ${
         !isLast ? "border-r border-gray-700" : ""
-      } ${canFilter ? "h-[70px]" : "h-[46px]"} px-0`}
+      } ${canFilter ? "h-14" : "h-8"}`}
       style={{
         width: columnSize,
         minWidth: header.column.columnDef.minSize,
@@ -47,13 +46,11 @@ const HeaderCell = <TData,>({
       }}
     >
       <div className="flex flex-col h-full w-full">
-        <div className="flex items-center justify-between mb-1">
-          <div className="select-none font-medium text-gray-200 text-[12px] leading-tight uppercase tracking-wider truncate w-full">
+        <div className="flex items-center justify-between mb-0.5">
+          <div className="select-none font-medium text-gray-200 text-[11px] leading-tight uppercase tracking-wider truncate w-full">
             {headerContent}
           </div>
-          <div className="flex items-center ml-1">
-            <ColumnSortButton column={header.column} />
-          </div>
+          <ColumnSortButton column={header.column} />
         </div>
         <div className={`w-full ${canFilter ? "mt-auto" : "hidden"}`}>
           <ColumnFilterInput column={header.column} />
