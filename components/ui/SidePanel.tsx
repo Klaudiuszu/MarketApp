@@ -1,10 +1,12 @@
 "use client";
 
+import { tanColumns } from "@/app/order-intentions/dialogs/portfolioDialog/tanColumns";
 import { INewIssueType } from "@/lib/schemas/NewIssueSchema";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import BlotterControlBar from "./blotter/BlotterControlBar";
 import { ApiStatus } from "./blotter/constants";
 import { Loader } from "./blotter/Loader";
+import { BlotterDialog } from "./dialog/BlotterDialog";
 
 interface SidePanelProps {
   title: string;
@@ -29,6 +31,9 @@ export default function SidePanel({
   loading = false,
   onSelect,
 }: SidePanelProps) {
+  const [visible, setVisible] = useState(false);
+  const [hoveredButton, setHoveredButton] = useState<string | null>(null);
+
   const formatDate = (dateString: string) =>
     new Date(dateString).toLocaleDateString("en-US", {
       month: "short",
@@ -50,7 +55,7 @@ export default function SidePanel({
         ${className}
       `}
     >
-      <div className=" bg-gray-900 border border-gray-700 overflow-hidden flex flex-col">
+      <div className="bg-gray-900 border border-gray-700 overflow-hidden flex flex-col">
         <BlotterControlBar title={title} status={status} />
       </div>
 
@@ -74,14 +79,16 @@ export default function SidePanel({
                   className={`
                     relative p-3 rounded cursor-pointer
                     transition-all duration-150
+                    border-l-4 min-h-[100px]
+                    group
                     ${
                       selectedId === item.id
-                        ? "bg-blue-900/50 border-l-4 border-blue-400 shadow-[inset_0_0_0_1px_rgba(96,165,250,0.4)]"
-                        : "hover:bg-gray-800/60 border-l-4 border-transparent"
+                        ? "bg-blue-900/20 border-blue-500 shadow-[inset_0_0_0_1px_rgba(59,130,246,0.3)]"
+                        : "hover:bg-gray-800/60 border-transparent"
                     }
                   `}
                 >
-                  <div className="flex justify-between items-start mb-1">
+                  <div className="flex justify-between items-start mb-1 pr-16">
                     <span
                       className={`text-xs font-mono ${
                         selectedId === item.id
@@ -106,17 +113,140 @@ export default function SidePanel({
                   </div>
 
                   <h4
-                    className={`text-sm font-medium mb-1 ${
-                      selectedId === item.id ? "text-blue-200" : "text-gray-200"
+                    className={`text-sm font-medium mb-2 pr-16 ${
+                      selectedId === item.id ? "text-blue-100" : "text-gray-200"
                     }`}
                   >
                     {item.title}
                   </h4>
-
-                  <div className="flex justify-between text-xs text-gray-500">
-                    <span>{item.assignee}</span>
-                    <span>{formatDate(item.createdAt)}</span>
+                  <div className="flex justify-between text-xs pr-16">
+                    <span
+                      className={
+                        selectedId === item.id
+                          ? "text-blue-300/70"
+                          : "text-gray-500"
+                      }
+                    >
+                      {item.assignee}
+                    </span>
+                    <span
+                      className={
+                        selectedId === item.id
+                          ? "text-blue-300/70"
+                          : "text-gray-500"
+                      }
+                    >
+                      {formatDate(item.createdAt)}
+                    </span>
                   </div>
+                  {selectedId === item.id && (
+                    <div className="pt-4">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setVisible(true);
+                        }}
+                        onMouseEnter={() => setHoveredButton(item.id)}
+                        onMouseLeave={() => setHoveredButton(null)}
+                        className={`
+                          relative
+                          px-3 py-1.5
+                          text-xs font-medium
+                          rounded
+                          transition-all duration-300
+                          whitespace-nowrap
+                          cursor-pointer
+                          overflow-hidden
+                          ${
+                            hoveredButton === item.id
+                              ? "transform scale-[1.02]"
+                              : ""
+                          }
+                        `}
+                      >
+                        <div
+                          className={`
+                            absolute inset-0
+                            bg-linear-to-r from-blue-500/10 via-blue-500/20 to-blue-500/10
+                            rounded
+                            transition-opacity duration-300
+                            ${
+                              hoveredButton === item.id
+                                ? "opacity-100"
+                                : "opacity-0"
+                            }
+                          `}
+                        />
+                        <div
+                          className={`
+                            relative z-10
+                            flex items-center justify-center gap-1.5
+                          `}
+                        >
+                          <span
+                            className={`
+                              transition-all duration-300
+                              ${
+                                hoveredButton === item.id
+                                  ? "text-blue-100"
+                                  : "text-blue-300"
+                              }
+                            `}
+                          >
+                            Create Order
+                          </span>
+                          <svg
+                            className={`
+                              w-3.5 h-3.5
+                              transition-all duration-300
+                              ${
+                                hoveredButton === item.id
+                                  ? "text-blue-200 transform translate-x-0.5"
+                                  : "text-blue-300/70"
+                              }
+                            `}
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M14 5l7 7m0 0l-7 7m7-7H3"
+                            />
+                          </svg>
+                        </div>
+                        <div
+                          className={`
+                            absolute inset-0
+                            border rounded
+                            transition-all duration-300
+                            ${
+                              hoveredButton === item.id
+                                ? "border-blue-400/60"
+                                : "border-blue-400/30"
+                            }
+                          `}
+                        />
+                        <div
+                          className={`
+                            absolute inset-0
+                            bg-linear-to-r from-transparent via-blue-400/10 to-transparent
+                            -translate-x-full
+                            rounded
+                            transition-transform duration-700
+                            ${
+                              hoveredButton === item.id
+                                ? "translate-x-full"
+                                : ""
+                            }
+                          `}
+                        />
+                      </button>
+                    </div>
+                  )}
                 </div>
 
                 {index < data.length - 1 && (
@@ -135,6 +265,16 @@ export default function SidePanel({
           </div>
         )}
       </div>
+      <BlotterDialog
+        visible={visible}
+        title="Select Portfolio & Carve-out"
+        columns={tanColumns}
+        data={[]}
+        onDiscard={() => setVisible(false)}
+        onContinue={() => {
+          setVisible(false);
+        }}
+      />
     </aside>
   );
 }
