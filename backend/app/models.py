@@ -71,3 +71,16 @@ class Issue(BaseModel):
     type: IssueType
     assignee: str
     createdAt: str
+
+class CreateOrderRequest(BaseModel):
+    newIssueId: str
+    side: str
+    quantity: int
+    price: float
+
+class Portfolio(BaseModel):
+    portfolioId: str
+    portfolioLongName: str
+    carveoutId: str
+    carveoutLongName: str
+    currency: str
