@@ -1,12 +1,11 @@
 "use client";
-
-import { tanColumns } from "@/app/order-intentions/dialogs/portfolioDialog/tanColumns";
-import { INewIssueType } from "@/lib/schemas/NewIssueSchema";
 import { ReactNode, useState } from "react";
-import BlotterControlBar from "./blotter/BlotterControlBar";
-import { ApiStatus } from "./blotter/constants";
-import { Loader } from "./blotter/Loader";
-import { BlotterDialog } from "./dialog/BlotterDialog";
+import BlotterControlBar from "../../../../components/ui/blotter/BlotterControlBar";
+import { ApiStatus } from "../../../../components/ui/blotter/constants";
+import { Loader } from "../../../../components/ui/blotter/Loader";
+import { BlotterDialog } from "../../../../components/ui/dialog/BlotterDialog";
+import { INewIssueType } from "../../../../lib/schemas/NewIssueSchema";
+import { tanColumns } from "../../dialogs/portfolioDialog/tanColumns";
 
 interface SidePanelProps {
   title: string;

@@ -1,7 +1,6 @@
 "use client";
 import { useFetchData } from "@/components/hooks/useFetchData";
 import BlotterControlBar from "@/components/ui/blotter/BlotterControlBar";
-import SidePanel from "@/components/ui/SidePanel";
 import {
   INewIssueType,
   NewIssuesArraySchema,
@@ -23,6 +22,7 @@ import { Toast } from "primereact/toast";
 import { useCallback, useEffect, useRef } from "react";
 import Blotter from "../../components/ui/blotter/Blotter";
 import { atomSelectedNewIssueID } from "./atoms/atomOrderIntention";
+import SidePanel from "./OrderIntentionView/sidePanel/SidePanel";
 import SideRatioChart from "./OrderIntentionView/SideRatioChart";
 import { tanColumns } from "./OrderIntentionView/tanColumns";
 
