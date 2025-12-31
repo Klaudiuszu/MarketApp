@@ -8,7 +8,7 @@ import {
   PortfolioRow,
 } from "@/lib/schemas/PortfolioSchema";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type PortfolioBlotterDialogProps = {
   visible: boolean;
@@ -27,16 +27,31 @@ export const PortfolioBlotterDialog = ({
     autoFetch: false,
   });
 
+  const [editableData, setEditableData] = useState<PortfolioRow[]>([]);
+
+  const updateData = (rowIndex: number, columnId: string, value: unknown) => {
+    setEditableData((old) =>
+      old.map((row, index) =>
+        index === rowIndex ? { ...row, [columnId]: value } : row
+      )
+    );
+  };
+
   const table = useReactTable({
-    data,
+    data: editableData,
     columns: tanColumns,
     getCoreRowModel: getCoreRowModel(),
     enableRowSelection: true,
+    meta: {
+      updateData,
+    },
   });
 
   useEffect(() => {
     if (visible) {
-      fetchData().catch(() => {});
+      fetchData()
+        .then((fetched) => setEditableData(fetched))
+        .catch(() => {});
     }
   }, [visible, fetchData]);
 

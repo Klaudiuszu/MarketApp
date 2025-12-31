@@ -378,7 +378,6 @@
   }
 }
 
-/* Market News Component Styles */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -388,7 +387,6 @@
   display: none;
 }
 
-/* TradingView Advanced Chart Widget Styles */
 .tradingview-widget-container {
   position: relative;
   background-color: #141414 !important;
@@ -455,7 +453,6 @@
   overflow: hidden !important;
 }
 
-/* Custom scrollbar that shows on hover */
 .scrollbar-hide-default {
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
@@ -551,4 +548,84 @@ td:has(.has-sell-cell) {
 .pi-sync:before {
   font-size: 0.75rem !important;
   line-height: 0.875rem;
+}
+
+/* ================================
+   PrimeReact Dropdown – Blotter
+   Row height: 22px
+   ================================ */
+
+.blotter-dropdown {
+  height: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  padding: 0 !important;
+  border-radius: 2px;
+
+  background: #1f2937;
+  box-sizing: border-box;
+}
+
+.blotter-dropdown.p-focus {
+  border-color: #3b82f6 !important;
+  outline: none !important;
+}
+
+.blotter-dropdown .p-dropdown-label {
+  height: 22px !important;
+  line-height: 22px !important;
+
+  padding: 0 6px !important;
+  margin: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  font-size: 10px;
+  color: #e5e7eb;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.blotter-dropdown .p-dropdown-trigger {
+  height: 22px !important;
+  width: 20px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.blotter-dropdown .p-dropdown-trigger-icon {
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.blotter-dropdown-panel {
+  background: #111827 !important;
+  border: 1px solid #374151 !important;
+  font-size: 11px !important;
+}
+
+.blotter-dropdown-item {
+  padding: 4px 8px !important;
+  font-size: 11px !important;
+  color: #e5e7eb !important;
+}
+
+.blotter-dropdown-item.p-highlight {
+  background-color: #374151 !important;
+  color: #ffffff !important;
+}
+
+.blotter-dropdown-item:not(.p-highlight):hover {
+  background-color: #1f2937 !important;
 }

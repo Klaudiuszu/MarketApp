@@ -23,46 +23,44 @@ export const CheckboxSelection = ({
 
   return (
     <div
-      className={`inline-flex items-center justify-center w-full ${className}`}
+      className={`
+        flex items-center justify-center
+        h-full w-full
+        ${className}
+      `}
     >
       <Checkbox
         inputId={id}
         checked={checked}
         disabled={disabled}
         onChange={handleChange}
-        className="m-0! h-1"
         pt={{
           root: {
             className: `
-              !w-5 !h-5 !m-0
-              !border
-              !rounded
-              transition-all duration-200 ease-in-out
-              ${
-                checked
-                  ? "!border-blue-400 !bg-gray-700"
-                  : "!border-gray-400 !bg-gray-700 hover:!border-gray-300"
-              }
-              ${disabled ? "!opacity-50 !cursor-not-allowed" : ""}
-            `,
+        !m-0 !p-0
+        flex items-center justify-center
+      `,
           },
           box: {
             className: `
-              !w-4 !h-4
-              !flex !items-center !justify-center
-              !bg-transparent
-            `,
+        !w-[14px] !h-[14px]
+        !border !rounded-[3px]
+        transition-colors duration-150
+
+        border-gray-500 bg-gray-800
+        hover:border-gray-400
+
+        data-[p-highlight=true]:!border-blue-500
+        data-[p-highlight=true]:!bg-blue-500
+
+        ${disabled ? "!opacity-50" : ""}
+      `,
           },
           icon: {
             className: `
-              !w-3 !h-3
-              !text-blue-300
-            `,
-          },
-          input: {
-            className: `
-              !hidden
-            `,
+        !w-[10px] !h-[10px]
+        !text-white !stroke-2
+      `,
           },
         }}
       />

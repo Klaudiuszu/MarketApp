@@ -1,4 +1,6 @@
 import { CheckboxSelection } from "@/components/ui/blotter/cellRenderers/checkBoxSelection";
+import { DropdownEditableCell } from "@/components/ui/blotter/cellRenderers/DropdownEditableCell";
+import { CURRENCY_OPTIONS } from "@/lib/constants";
 import { PortfolioRow } from "@/lib/schemas/PortfolioSchema";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -9,7 +11,7 @@ export const tanColumns: ColumnDef<PortfolioRow>[] = [
     cell: ({ row }) => (
       <CheckboxSelection
         checked={row.getIsSelected()}
-        onChange={() => row.toggleSelected()}
+        onChange={row.toggleSelected}
       />
     ),
     size: 50,
@@ -33,5 +35,8 @@ export const tanColumns: ColumnDef<PortfolioRow>[] = [
   {
     accessorKey: "currency",
     header: "Currency",
+    cell: (ctx) => (
+      <DropdownEditableCell ctx={ctx} options={CURRENCY_OPTIONS} />
+    ),
   },
 ];

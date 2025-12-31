@@ -336,3 +336,13 @@ export const WATCHLIST_TABLE_HEADER = [
   "Alert",
   "Action",
 ];
+
+export const CURRENCY_OPTIONS = [
+  { label: "USD", value: "USD" },
+  { label: "EUR", value: "EUR" },
+  { label: "GBP", value: "GBP" },
+  { label: "CHF", value: "CHF" },
+  { label: "PLN", value: "PLN" },
+];
+
+export const ROW_HEIGHT = 22;

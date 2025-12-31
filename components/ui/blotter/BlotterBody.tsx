@@ -1,5 +1,6 @@
 "use client";
 
+import { ROW_HEIGHT } from "@/lib/constants";
 import { flexRender, Table } from "@tanstack/react-table";
 
 export type BlotterBodyProps<TData> = {
@@ -79,6 +80,10 @@ function TableRow<TData>({
       className={`${zebraClass} hover:bg-gray-800 border-b border-gray-700/60`}
       data-testid="blotter-row"
       data-row-index={rowIndex}
+      style={{
+        height: ROW_HEIGHT,
+        maxHeight: ROW_HEIGHT,
+      }}
     >
       {row.getVisibleCells().map((cell: any, cellIndex: number) => (
         <TableCell
@@ -112,28 +117,37 @@ function TableCell<TData>({ cell }: TableCellProps<TData>) {
   return (
     <td
       key={cell.id}
-      className={`py-2 text-[12px] align-middle ${
-        isNumeric ? "text-right" : "text-left"
-      } border-r border-gray-700/60`}
+      className={`
+    text-[12px]
+    align-middle
+    border-r border-gray-700/60
+  `}
       data-column-id={cell.column.id}
       data-cell-type={isNumeric ? "numeric" : "text"}
       style={{
         width,
         minWidth: `${cell.column.columnDef.minSize || 80}px`,
         maxWidth: `${cell.column.columnDef.maxSize || 300}px`,
+        height: ROW_HEIGHT,
+        padding: 0,
         boxSizing: "border-box",
-        overflow: "hidden",
       }}
     >
       <div
-        className={`px-3 ${isNumeric ? "pr-4" : ""} ${
-          cell.column.id === "createdAt" || cell.column.id === "strategy"
-            ? "whitespace-normal wrap-break-word"
-            : "whitespace-nowrap"
-        }`}
+        className={`
+    flex items-center
+    h-full
+    px-2
+    overflow-hidden
+    ${isNumeric ? "justify-end pr-3" : "justify-start"}
+    ${
+      cell.column.id === "createdAt" || cell.column.id === "strategy"
+        ? "whitespace-normal"
+        : "whitespace-nowrap"
+    }
+  `}
         style={{
           textOverflow: "ellipsis",
-          overflow: "hidden",
         }}
       >
         {flexRender(cell.column.columnDef.cell, cell.getContext())}
