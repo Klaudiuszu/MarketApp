@@ -1,14 +1,19 @@
+import { CheckboxSelection } from "@/components/ui/blotter/cellRenderers/checkBoxSelection";
+import { PortfolioRow } from "@/lib/schemas/PortfolioSchema";
 import { ColumnDef } from "@tanstack/react-table";
 
-type PortfolioRow = {
-  portfolioId: string;
-  carveoutId: string;
-  portfolioLongName: string;
-  carveoutLongName: string;
-  currency: string;
-};
-
 export const tanColumns: ColumnDef<PortfolioRow>[] = [
+  {
+    id: "isChecked",
+    header: "Is Checked",
+    cell: ({ row }) => (
+      <CheckboxSelection
+        checked={row.getIsSelected()}
+        onChange={() => row.toggleSelected()}
+      />
+    ),
+    size: 50,
+  },
   {
     accessorKey: "portfolioId",
     header: "Portfolio ID",

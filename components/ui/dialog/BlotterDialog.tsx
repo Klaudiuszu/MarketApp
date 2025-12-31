@@ -1,38 +1,26 @@
 "use client";
 
-import {
-  ColumnDef,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import { Table } from "@tanstack/react-table";
 import { Dialog } from "primereact/dialog";
 import Blotter from "../blotter/Blotter";
 
 export type BlotterDialogProps<TData> = {
   visible: boolean;
   title: string;
-  columns: ColumnDef<TData, any>[];
-  data: TData[];
+  table: Table<TData>;
+  loading?: boolean;
   onDiscard: () => void;
   onContinue: () => void;
-  loading?: boolean;
 };
 
 export function BlotterDialog<TData>({
+  table,
   visible,
   title,
-  columns,
-  data,
   onDiscard,
   onContinue,
   loading = false,
 }: BlotterDialogProps<TData>) {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
   const footer = (
     <div className="flex justify-end gap-2 pt-4">
       <button
@@ -61,12 +49,7 @@ export function BlotterDialog<TData>({
       draggable={false}
       className="p-0"
     >
-      <Blotter
-        table={table}
-        title={title}
-        loading={loading}
-        className="h-[500px]"
-      />
+      <Blotter table={table} title={title} loading={loading} />
     </Dialog>
   );
 }

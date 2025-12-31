@@ -3,9 +3,8 @@ import { ReactNode, useState } from "react";
 import BlotterControlBar from "../../../../components/ui/blotter/BlotterControlBar";
 import { ApiStatus } from "../../../../components/ui/blotter/constants";
 import { Loader } from "../../../../components/ui/blotter/Loader";
-import { BlotterDialog } from "../../../../components/ui/dialog/BlotterDialog";
 import { INewIssueType } from "../../../../lib/schemas/NewIssueSchema";
-import { tanColumns } from "../../dialogs/portfolioDialog/tanColumns";
+import { PortfolioBlotterDialog } from "../../../order-intentions/dialogs/portfolioDialog/PortfolioBlotterDialog";
 
 interface SidePanelProps {
   title: string;
@@ -264,14 +263,11 @@ export default function SidePanel({
           </div>
         )}
       </div>
-      <BlotterDialog
+      <PortfolioBlotterDialog
         visible={visible}
-        title="Select Portfolio & Carve-out"
-        columns={tanColumns}
-        data={[]}
-        onDiscard={() => setVisible(false)}
+        onClose={() => setVisible(false)}
         onContinue={() => {
-          setVisible(false);
+          console.log("Portfolio selected");
         }}
       />
     </aside>
