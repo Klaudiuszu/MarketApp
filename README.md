@@ -36,7 +36,7 @@
 - **FastAPI**
 - **Swagger / OpenAPI**
 - **PostgreSQL**
-- Backend-side filtering of **order intentions**
+- Backend-side filtering of **Trade Intent**
 - Explicit API contracts (OpenAPI)
 
 ---
@@ -50,13 +50,13 @@
 
 ---
 
-## Flow: New Issue → Backend Filtering
+## Flow: Primary Issuance → Backend Filtering
 
-1. User selects a **New Issue** (frontend)
+1. User selects a **Primary Issuance** (frontend)
 2. The selected issue is stored in a **Jotai atom**
 3. A request is triggered to a **FastAPI endpoint**
 4. Backend:
-   - filters **order intentions** by issue
+   - filters **Trade Intent** by issue
    - returns pre-processed domain data
 5. Frontend:
    - updates the TanStack Table

@@ -4,7 +4,7 @@ import BlotterControlBar from "../../../../components/ui/blotter/BlotterControlB
 import { ApiStatus } from "../../../../components/ui/blotter/constants";
 import { Loader } from "../../../../components/ui/blotter/Loader";
 import { INewIssueType } from "../../../../lib/schemas/NewIssueSchema";
-import { PortfolioBlotterDialog } from "../../../order-intentions/dialogs/portfolioDialog/PortfolioBlotterDialog";
+import { PortfolioBlotterDialog } from "../../../trade-intent/dialogs/portfolioDialog/PortfolioBlotterDialog";
 
 interface SidePanelProps {
   title: string;

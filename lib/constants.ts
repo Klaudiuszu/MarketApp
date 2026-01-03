@@ -1,6 +1,6 @@
 export const NAV_ITEMS = [
   { href: "/", label: "Dashboard" },
-  { href: "/order-intentions", label: "Trade Indications" },
+  { href: "/trade-intent", label: "Trade Indications" },
 ];
 
 // Sign-up form select options

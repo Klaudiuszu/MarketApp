@@ -8,14 +8,14 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { IOrderIntentionsType } from "../../../lib/schemas/orderIntentionSchema";
+import { ITradeIntentType } from "../../../lib/schemas/TradeIntentSchema";
 enum Side {
   BUY = "BUY",
   SELL = "SELL",
 }
 
 interface SideRatioChartProps {
-  ordersData: IOrderIntentionsType[];
+  ordersData: ITradeIntentType[];
 }
 
 const SideRatioChart: React.FC<SideRatioChartProps> = ({ ordersData }) => {

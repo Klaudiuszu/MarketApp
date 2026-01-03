@@ -5,7 +5,7 @@ export const OrderType = z.enum(["MARKET", "LIMIT", "STOP"]);
 export const Status = z.enum(["PENDING", "FILLED", "CANCELLED", "REJECTED"]);
 export const TimeInForce = z.enum(["DAY", "GTC", "IOC"]);
 
-export const OrderIntentionSchema = z
+export const TradeIntentchema = z
   .object({
     id: z.string(),
     newIssueId: z.string(),
@@ -23,6 +23,6 @@ export const OrderIntentionSchema = z
   })
   .strict();
 
-export const OrderIntentionsArraySchema = z.array(OrderIntentionSchema);
+export const TradeIntentArraySchema = z.array(TradeIntentchema);
 
-export type IOrderIntentionsType = z.infer<typeof OrderIntentionSchema>;
+export type ITradeIntentType = z.infer<typeof TradeIntentchema>;

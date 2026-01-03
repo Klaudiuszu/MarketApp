@@ -6,9 +6,9 @@ import {
   NewIssuesArraySchema,
 } from "@/lib/schemas/NewIssueSchema";
 import {
-  IOrderIntentionsType,
-  OrderIntentionsArraySchema,
-} from "@/lib/schemas/orderIntentionSchema";
+  ITradeIntentType,
+  TradeIntentArraySchema,
+} from "@/lib/schemas/TradeIntentSchema";
 import { toastService } from "@/lib/toastService";
 import { dateFilterFn } from "@/lib/utils/dateFilterUtils";
 import {
@@ -21,12 +21,12 @@ import { useAtom } from "jotai";
 import { Toast } from "primereact/toast";
 import { useCallback, useEffect, useRef } from "react";
 import Blotter from "../../components/ui/blotter/Blotter";
-import { atomSelectedNewIssueID } from "./atoms/atomOrderIntention";
-import SidePanel from "./OrderIntentionView/sidePanel/SidePanel";
-import SideRatioChart from "./OrderIntentionView/SideRatioChart";
-import { tanColumns } from "./OrderIntentionView/tanColumns";
+import { atomSelectedNewIssueID } from "./atoms/atomTradeIntent";
+import SidePanel from "./TradeIntentView/sidePanel/SidePanel";
+import SideRatioChart from "./TradeIntentView/SideRatioChart";
+import { tanColumns } from "./TradeIntentView/tanColumns";
 
-const OrderIntentions = () => {
+const TradeIntent = () => {
   const toastRef = useRef<Toast>(null);
   const [selectedNewIssueID, setSelectedNewIssueID] = useAtom(
     atomSelectedNewIssueID
@@ -37,9 +37,9 @@ const OrderIntentions = () => {
     status: ordersStatus,
     loading: ordersLoading,
     fetchData: fetchOrders,
-  } = useFetchData<IOrderIntentionsType>({
+  } = useFetchData<ITradeIntentType>({
     endpoint: selectedNewIssueID ? `/api/orders/${selectedNewIssueID}` : "",
-    schema: OrderIntentionsArraySchema,
+    schema: TradeIntentArraySchema,
     enableDelay: true,
     delayMs: 1000,
     autoFetch: !!selectedNewIssueID,
@@ -86,7 +86,7 @@ const OrderIntentions = () => {
     <div className="flex flex-1 overflow-hidden">
       <div className="w-[300px] shrink-0 my-1">
         <SidePanel
-          title="All New Issues"
+          title="All Primary Issuances"
           status={issuesStatus}
           data={issuesData}
           loading={issuesLoading}
@@ -126,4 +126,4 @@ const OrderIntentions = () => {
   );
 };
 
-export default OrderIntentions;
+export default TradeIntent;

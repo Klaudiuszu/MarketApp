@@ -1,14 +1,13 @@
 "use client";
-
-import { tanColumns } from "@/app/order-intentions/dialogs/portfolioDialog/tanColumns";
-import { useFetchData } from "@/components/hooks/useFetchData";
-import { BlotterDialog } from "@/components/ui/dialog/BlotterDialog";
+import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { SetStateAction, useEffect, useState } from "react";
+import { useFetchData } from "../../../../components/hooks/useFetchData";
+import { BlotterDialog } from "../../../../components/ui/dialog/BlotterDialog";
 import {
   PortfolioListSchema,
   PortfolioRow,
-} from "@/lib/schemas/PortfolioSchema";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+} from "../../../../lib/schemas/PortfolioSchema";
+import { tanColumns } from "./tanColumns";
 
 type PortfolioBlotterDialogProps = {
   visible: boolean;
@@ -50,7 +49,19 @@ export const PortfolioBlotterDialog = ({
   useEffect(() => {
     if (visible) {
       fetchData()
-        .then((fetched) => setEditableData(fetched))
+        .then(
+          (
+            fetched: SetStateAction<
+              {
+                portfolioId: string;
+                carveoutId: string;
+                portfolioLongName: string;
+                carveoutLongName: string;
+                currency: string;
+              }[]
+            >
+          ) => setEditableData(fetched)
+        )
         .catch(() => {});
     }
   }, [visible, fetchData]);
