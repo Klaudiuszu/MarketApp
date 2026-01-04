@@ -1,10 +1,10 @@
-import TradingViewWidget from "@/components/ui/TradingViewWidget";
+import TradingViewWidget from "../../components/ui/TradingViewWidget";
 import {
   HEATMAP_WIDGET_CONFIG,
   MARKET_DATA_WIDGET_CONFIG,
   MARKET_OVERVIEW_WIDGET_CONFIG,
   TOP_STORIES_WIDGET_CONFIG,
-} from "@/lib/constants";
+} from "../../lib/constants";
 
 /**
  * Home page that renders multiple TradingView widgets in a responsive layout.

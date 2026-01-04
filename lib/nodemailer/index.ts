@@ -1,8 +1,8 @@
+import nodemailer from "nodemailer";
 import {
   NEWS_SUMMARY_EMAIL_TEMPLATE,
   WELCOME_EMAIL_TEMPLATE,
-} from "@/lib/nodemailer/templates";
-import nodemailer from "nodemailer";
+} from "../../lib/nodemailer/templates";
 
 export const transporter = nodemailer.createTransport({
   service: "gmail",

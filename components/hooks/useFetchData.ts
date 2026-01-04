@@ -1,8 +1,8 @@
-import { ApiStatus } from "@/components/ui/blotter/constants";
-import { toastService } from "@/lib/toastService";
-import { UseFetchDataOptions, UseFetchDataReturn } from "@/types/global";
 import { useCallback, useEffect, useState } from "react";
 import { ZodError } from "zod";
+import { ApiStatus } from "../../components/ui/blotter/constants";
+import { toastService } from "../../lib/toastService";
+import { UseFetchDataOptions, UseFetchDataReturn } from "../../types/global";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 

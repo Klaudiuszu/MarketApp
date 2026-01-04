@@ -1,6 +1,6 @@
-import { columnOrderStorage } from "@/lib/utils/columnOrderStorage";
 import { Table } from "@tanstack/react-table";
 import { useEffect } from "react";
+import { columnOrderStorage } from "../../lib/utils/columnOrderStorage";
 
 interface UseColumnOrderOptions {
   storageKey?: string;

@@ -1,4 +1,4 @@
-import { inngest } from "@/lib/inngest/client";
+import { inngest } from "../../lib/inngest/client";
 import { sendWelcomeEmail } from "../nodemailer";
 import { PERSONALIZED_WELCOME_EMAIL_PROMPT } from "./prompts";
 

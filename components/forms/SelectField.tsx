@@ -1,12 +1,27 @@
-import { Label } from "@/components/ui/label";
+import { Control, Controller, FieldError } from "react-hook-form";
+import { Label } from "../../components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Controller } from "react-hook-form";
+} from "../../components/ui/select";
+
+type Option = {
+  value: string;
+  label: string;
+};
+
+type SelectFieldProps = {
+  name: string;
+  label: string;
+  placeholder: string;
+  options: readonly Option[];
+  control: Control;
+  error?: FieldError;
+  required?: boolean;
+};
 
 /**
  * SelectField
