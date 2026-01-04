@@ -113,6 +113,19 @@
 
 ---
 
+### 5. FAST API on Vercel build and deployed by me
+
+- url: https://vercel.com/arksoftwares-projects/market-app/CMFvjzwJjoYEdzwP1ahChSuUk7Ai/source?f=src%2FREADME.md
+  API Endpoints:
+- GET /api/orders - Get all trade intentions
+- GET /api/orders/{new_issue_id} - Get orders by issue ID
+- POST /api/orders - Create new trade intention
+- GET /api/issues - Get all market issues
+- GET /api/issues/{issue_id} - Get specific issue
+- GET /api/portfolios - Get all portfolios
+
+---
+
 ## Design Principles
 
 - **Backend = single source of truth**
