@@ -4,9 +4,7 @@ import { ApiStatus } from "../../components/ui/blotter/constants";
 import { toastService } from "../../lib/toastService";
 import { UseFetchDataOptions, UseFetchDataReturn } from "../../types/global";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://market-h3rcsfpks-arksoftwares-projects.vercel.app";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export function useFetchData<T>({
   endpoint,
