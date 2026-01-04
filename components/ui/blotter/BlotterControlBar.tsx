@@ -1,7 +1,7 @@
 "use client";
 
-import { useColumnOrder } from "@/components/hooks/useColumnOrder";
 import { Table } from "@tanstack/react-table";
+import { useColumnOrder } from "../../../components/hooks/useColumnOrder";
 import { ApiStatus } from "./constants";
 import { ControlButtons } from "./ControlButtons";
 import { StatusIndicator } from "./StatusIndicator";

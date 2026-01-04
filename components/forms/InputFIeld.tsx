@@ -1,7 +1,19 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
+import { FieldError, RegisterOptions } from "react-hook-form";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { cn } from "../../lib/utils";
 
+export type FormInputProps = {
+  name: string;
+  label: string;
+  placeholder: string;
+  type?: string;
+  register: any;
+  error?: FieldError;
+  validation?: RegisterOptions;
+  disabled?: boolean;
+  value?: string;
+};
 /**
  * InputField
  *

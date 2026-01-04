@@ -1,6 +1,6 @@
-import { CheckboxSelection } from "@/components/ui/blotter/cellRenderers/checkBoxSelection";
-import { PortfolioRow } from "@/lib/schemas/PortfolioSchema";
 import { ColumnDef } from "@tanstack/react-table";
+import { CheckboxSelection } from "../../../../components/ui/blotter/cellRenderers/checkBoxSelection";
+import { PortfolioRow } from "../../../../lib/schemas/PortfolioSchema";
 
 export const tanColumns: ColumnDef<PortfolioRow>[] = [
   {

@@ -1,4 +1,3 @@
-// hooks/useColumnOrder.ts
 import { columnOrderStorage } from "@/lib/utils/columnOrderStorage";
 import { Table } from "@tanstack/react-table";
 import { useEffect } from "react";

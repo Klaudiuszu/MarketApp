@@ -1,7 +1,7 @@
 "use client";
 
-import { ROW_HEIGHT } from "@/lib/constants";
 import { flexRender, Table } from "@tanstack/react-table";
+import { ROW_HEIGHT } from "../../../lib/constants";
 
 export type BlotterBodyProps<TData> = {
   table: Table<TData>;

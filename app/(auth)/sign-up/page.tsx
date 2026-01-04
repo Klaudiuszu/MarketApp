@@ -1,19 +1,29 @@
 "use client";
 
-import { CountrySelectField } from "@/components/forms/CountrySelectField";
-import FooterLink from "@/components/forms/FooterLink";
-import InputField from "@/components/forms/InputFIeld";
-import SelectField from "@/components/forms/SelectField";
-import { Button } from "@/components/ui/button";
-import { signUpWithEmail } from "@/lib/actions/auth.actions";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { CountrySelectField } from "../../../components/forms/CountrySelectField";
+import FooterLink from "../../../components/forms/FooterLink";
+import InputField from "../../../components/forms/InputFIeld";
+import SelectField from "../../../components/forms/SelectField";
+import { Button } from "../../../components/ui/button";
+import { signUpWithEmail } from "../../../lib/actions/auth.actions";
 import {
   INVESTMENT_GOALS,
   PREFERRED_INDUSTRIES,
   RISK_TOLERANCE_OPTIONS,
-} from "@/lib/constants";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+} from "../../../lib/constants";
+
+export type SignUpFormData = {
+  fullName: string;
+  email: string;
+  password: string;
+  country: string;
+  investmentGoals: string;
+  riskTolerance: string;
+  preferredIndustry: string;
+};
 
 const SignUp = () => {
   const router = useRouter();
@@ -71,7 +81,6 @@ const SignUp = () => {
           validation={{
             required: "Email name is required",
             pattern: /^\w+@\w+\.\w+$/,
-            message: "Email address is required",
           }}
         />
 

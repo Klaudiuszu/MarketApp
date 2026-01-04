@@ -1,12 +1,17 @@
 "use client";
 
-import FooterLink from "@/components/forms/FooterLink";
-import InputField from "@/components/forms/InputFIeld";
-import { Button } from "@/components/ui/button";
-import { signInWithEmail } from "@/lib/actions/auth.actions";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import FooterLink from "../../../components/forms/FooterLink";
+import InputField from "../../../components/forms/InputFIeld";
+import { Button } from "../../../components/ui/button";
+import { signInWithEmail } from "../../../lib/actions/auth.actions";
+
+type SignInFormData = {
+  email: string;
+  password: string;
+};
 
 const SignIn = () => {
   const router = useRouter();

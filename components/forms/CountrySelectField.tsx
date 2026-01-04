@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { useState } from "react";
+import { Control, Controller, FieldError } from "react-hook-form";
+import countryList from "react-select-country-list";
+import { Button } from "../../components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -9,18 +13,14 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { Label } from "@/components/ui/label";
+} from "../../components/ui/command";
+import { Label } from "../../components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { useState } from "react";
-import { Control, Controller, FieldError } from "react-hook-form";
-import countryList from "react-select-country-list";
+} from "../../components/ui/popover";
+import { cn } from "../../lib/utils";
 
 type CountrySelectProps = {
   name: string;
