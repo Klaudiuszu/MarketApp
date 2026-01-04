@@ -1,7 +1,6 @@
 from app.models import OrderIntention, Side, OrderType, Status, TimeInForce
 
 MOCK_ORDERS = [
-    # ISS-006 - więcej zamówień (15 zamówień)
     OrderIntention(
         id="ORD-001",
         newIssueId="ISS-006",
