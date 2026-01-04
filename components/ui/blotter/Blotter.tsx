@@ -59,7 +59,7 @@ export default function Blotter<TData>({
 }: BlotterProps<TData>) {
   return (
     <div
-      className={`relative w-full h-[600px] border bg-gray-900 border-gray-700 shadow-sm text-gray-200 ${className}`}
+      className={`relative w-full h-[600px] border bg-gray-900 border-gray-700 shadow-sm text-gray-200 overflow-x-auto ${className}`}
     >
       <div className="sticky top-0 z-20 bg-gray-900 border-b border-gray-700">
         <BlotterControlBar
@@ -73,7 +73,7 @@ export default function Blotter<TData>({
           <BlotterHeader table={table} />
         </table>
       </div>
-      <div className="relative h-[calc(100%-96px)] overflow-auto">
+      <div className="relative h-[calc(100%-96px)]">
         {!loading && (
           <table className="table-fixed w-full text-xs">
             <BlotterBody table={table} zebraStriping={zebraStriping} />

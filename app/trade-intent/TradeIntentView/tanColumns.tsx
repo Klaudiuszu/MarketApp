@@ -2,11 +2,11 @@
 
 import { DefaultCellRenderer } from "@/components/ui/blotter/cellRenderers";
 import { CurrencyCellRenderer } from "@/components/ui/blotter/cellRenderers/CurrencyCellRenderer";
-import { ITradeIntentType } from "@/lib/schemas/TradeIntentchema";
 import { dateFilterFn } from "@/lib/utils/dateFilterUtils";
 import { ColumnDef } from "@tanstack/react-table";
 import { BuySellCellRenderer } from "../../../components/ui/blotter/cellRenderers/BuySellCellRenderer";
 import { DateRangeFilter } from "../../../components/ui/blotter/filters/DateRangeFilter";
+import { ITradeIntentType } from "../../../lib/schemas/TradeIntentSchema";
 
 export const tanColumns: ColumnDef<ITradeIntentType>[] = [
   {

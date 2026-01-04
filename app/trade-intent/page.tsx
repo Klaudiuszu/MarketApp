@@ -94,9 +94,9 @@ const TradeIntent = () => {
           onSelect={setSelectedNewIssueID}
         />
       </div>
-      <div className="flex-1 flex flex-col min-h-0">
+      <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
         <div className="flex-1 px-1 mt-1">
-          <div className="h-full bg-gray-900 border border-gray-700 overflow-hidden flex flex-col">
+          <div className="h-full bg-gray-900 border border-gray-700 flex flex-col min-h-0">
             <Blotter
               table={table}
               title="Trade Indications"
@@ -108,13 +108,13 @@ const TradeIntent = () => {
           </div>
         </div>
         <div className="flex-1 px-1 my-1">
-          <div className="h-full bg-gray-900 border border-gray-700 overflow-hidden flex flex-col">
+          <div className="h-full bg-gray-900 border border-gray-700 flex flex-col">
             <BlotterControlBar
               title={"Order Side Ratio"}
               status={ordersStatus}
             />
 
-            <div className="flex-1 p-4 min-h-0">
+            <div className="flex-1 p-4 min-h-0 overflow-auto">
               <SideRatioChart ordersData={ordersData || []} />
             </div>
           </div>

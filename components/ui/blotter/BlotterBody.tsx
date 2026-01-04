@@ -30,7 +30,7 @@ export default function BlotterBody<TData>({
       <tbody>
         <tr>
           <td
-            className="px-3 py-2 text-center text-gray-400 border-b border-gray-700"
+            className="px-3 py-2 text-center text-gray-400 border-b border-gray-700 w-fix"
             colSpan={table.getAllLeafColumns().length}
           >
             No data available
@@ -127,7 +127,6 @@ function TableCell<TData>({ cell }: TableCellProps<TData>) {
       style={{
         width,
         minWidth: `${cell.column.columnDef.minSize || 80}px`,
-        maxWidth: `${cell.column.columnDef.maxSize || 300}px`,
         height: ROW_HEIGHT,
         padding: 0,
         boxSizing: "border-box",
@@ -138,7 +137,7 @@ function TableCell<TData>({ cell }: TableCellProps<TData>) {
     flex items-center
     h-full
     px-2
-    overflow-hidden
+    overflow-visible
     ${isNumeric ? "justify-end pr-3" : "justify-start"}
     ${
       cell.column.id === "createdAt" || cell.column.id === "strategy"
