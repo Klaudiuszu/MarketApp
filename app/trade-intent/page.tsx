@@ -84,7 +84,7 @@ const TradeIntent = () => {
 
   return (
     <div className="flex flex-1 overflow-hidden">
-      <div className="w-[300px] shrink-0 my-1">
+      <div className="w-[300px]">
         <SidePanel
           title="All Primary Issuances"
           status={issuesStatus}
