@@ -1,4 +1,10 @@
-import { Control, Controller, FieldError } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldError,
+  FieldValues,
+  Path,
+} from "react-hook-form";
 import { Label } from "../../components/ui/label";
 import {
   Select,
@@ -13,12 +19,13 @@ type Option = {
   label: string;
 };
 
-type SelectFieldProps = {
-  name: string;
+// Użyj generycznego typu T, który rozszerza FieldValues
+type SelectFieldProps<T extends FieldValues> = {
+  name: Path<T>;
   label: string;
   placeholder: string;
   options: readonly Option[];
-  control: Control;
+  control: Control<T>;
   error?: FieldError;
   required?: boolean;
 };
@@ -39,7 +46,7 @@ type SelectFieldProps = {
  * @param {boolean} required - Whether the field is required.
  * @returns {JSX.Element} A labeled select field wired to react-hook-form.
  */
-const SelectField = ({
+const SelectField = <T extends FieldValues>({
   name,
   label,
   placeholder,
@@ -47,7 +54,7 @@ const SelectField = ({
   control,
   error,
   required = false,
-}: SelectFieldProps) => {
+}: SelectFieldProps<T>) => {
   return (
     <div className="space-y-2">
       <Label htmlFor={name} className="form-label">
@@ -76,11 +83,12 @@ const SelectField = ({
                 </SelectItem>
               ))}
             </SelectContent>
-            {error && <p className="text-sm text-red-500">{error.message}</p>}
           </Select>
         )}
       />
+      {error && <p className="text-sm text-red-500">{error.message}</p>}
     </div>
   );
 };
+
 export default SelectField;
