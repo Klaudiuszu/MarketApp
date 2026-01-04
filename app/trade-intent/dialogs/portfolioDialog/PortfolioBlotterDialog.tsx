@@ -20,7 +20,7 @@ export const PortfolioBlotterDialog = ({
   onClose,
   onContinue,
 }: PortfolioBlotterDialogProps) => {
-  const { data, loading, fetchData } = useFetchData<PortfolioRow>({
+  const { loading, status, fetchData } = useFetchData<PortfolioRow>({
     endpoint: "/api/portfolios",
     schema: PortfolioListSchema,
     autoFetch: false,
@@ -72,6 +72,7 @@ export const PortfolioBlotterDialog = ({
       title="Select Portfolio & Carve-out"
       table={table}
       loading={loading}
+      status={status}
       onDiscard={onClose}
       onContinue={() => {
         const selected = table

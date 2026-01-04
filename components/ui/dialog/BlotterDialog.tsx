@@ -3,12 +3,14 @@
 import { Table } from "@tanstack/react-table";
 import { Dialog } from "primereact/dialog";
 import Blotter from "../blotter/Blotter";
+import { ApiStatus } from "../blotter/constants";
 
 export type BlotterDialogProps<TData> = {
   visible: boolean;
   title: string;
   table: Table<TData>;
-  loading?: boolean;
+  status: ApiStatus;
+  loading: boolean;
   onDiscard: () => void;
   onContinue: () => void;
 };
@@ -16,6 +18,7 @@ export type BlotterDialogProps<TData> = {
 export function BlotterDialog<TData>({
   table,
   visible,
+  status,
   title,
   onDiscard,
   onContinue,
@@ -49,7 +52,7 @@ export function BlotterDialog<TData>({
       draggable={false}
       className="p-0"
     >
-      <Blotter table={table} title={title} loading={loading} />
+      <Blotter table={table} title={title} loading={loading} status={status} />
     </Dialog>
   );
 }
