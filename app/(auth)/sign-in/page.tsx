@@ -21,7 +21,7 @@ const SignIn = () => {
     formState: { errors, isSubmitting },
   } = useForm<SignInFormData>({
     defaultValues: {
-      email: "logintest@test.com",
+      email: "logintest@gmail.com",
       password: "logintest@test",
     },
     mode: "onBlur",
@@ -47,7 +47,7 @@ const SignIn = () => {
         <InputField
           name="email"
           label="Email"
-          placeholder="logintest@test.com"
+          placeholder="logintest@gmail.com"
           register={register}
           error={errors.email}
           validation={{
