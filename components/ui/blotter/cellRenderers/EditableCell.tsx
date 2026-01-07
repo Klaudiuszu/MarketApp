@@ -3,40 +3,58 @@
 import { useEffect, useState } from "react";
 
 type EditableCellProps = {
-  value: string;
+  value: string | number;
   rowIndex: number;
   columnId: string;
-  updateData: (rowIndex: number, columnId: string, value: string) => void;
+  type?: "text" | "number"; // <-- nowy prop
+  updateData: (
+    rowIndex: number,
+    columnId: string,
+    value: string | number
+  ) => void;
 };
 
 export const EditableCell = ({
   value,
   rowIndex,
   columnId,
+  type = "text",
   updateData,
 }: EditableCellProps) => {
-  const [localValue, setLocalValue] = useState(value);
+  const [localValue, setLocalValue] = useState<string | number>(value);
 
   useEffect(() => {
     setLocalValue(value);
   }, [value]);
 
+  const handleBlur = () => {
+    let newValue: string | number = localValue;
+
+    if (type === "number") {
+      const num = Number(localValue);
+      newValue = !isNaN(num) ? num : 0;
+    }
+
+    updateData(rowIndex, columnId, newValue);
+  };
+
   return (
     <input
+      type={type}
       value={localValue}
       onChange={(e) => setLocalValue(e.target.value)}
-      onBlur={() => updateData(rowIndex, columnId, localValue)}
+      onBlur={handleBlur}
       className="
         h-full
         w-full
         bg-gray-800
         text-gray-100
         border border-gray-700
-        rounded-sm  
         px-2
         text-[12px]
         leading-none
-    "
+        focus:outline-none
+      "
     />
   );
 };

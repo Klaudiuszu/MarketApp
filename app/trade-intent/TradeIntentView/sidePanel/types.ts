@@ -1,3 +1,4 @@
+import { ITradeIntentType } from "@/lib/schemas/TradeIntentSchema";
 import { ReactNode } from "react";
 import { ApiStatus } from "../../../../components/ui/blotter/constants";
 import { INewIssueType } from "../../../../lib/schemas/NewIssueSchema";
@@ -8,6 +9,7 @@ export interface SidePanelProps {
   onSelect: (id: string | null) => void;
   status?: ApiStatus;
   data: INewIssueType[];
+  orders: ITradeIntentType[] | null;
   children?: ReactNode;
   footerContent?: ReactNode;
   className?: string;

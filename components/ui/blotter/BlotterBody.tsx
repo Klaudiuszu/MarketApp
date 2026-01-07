@@ -136,9 +136,8 @@ function TableCell<TData>({ cell }: TableCellProps<TData>) {
         className={`
     flex items-center
     h-full
-    px-2
     overflow-visible
-    ${isNumeric ? "justify-end pr-3" : "justify-start"}
+    ${isNumeric ? "justify-end" : "justify-start"}
     ${
       cell.column.id === "createdAt" || cell.column.id === "strategy"
         ? "whitespace-normal"

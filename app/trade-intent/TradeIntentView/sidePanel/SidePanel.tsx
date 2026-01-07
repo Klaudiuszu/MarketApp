@@ -1,9 +1,14 @@
 "use client";
 
+import { userAtom } from "@/app/atomUser";
+import { PortfolioRow } from "@/lib/schemas/PortfolioSchema";
+import { useAtomValue } from "jotai";
+import { useState } from "react";
 import { Loader } from "../../../../components/ui/blotter/Loader";
 import { ApiStatus } from "../../../../components/ui/blotter/constants";
+import { mapPortfolioToCreateOrderRow } from "../../../trade-intent/dialogs/mappers/mapPortfolioToCreateOrderRow ";
 import { PortfolioBlotterDialog } from "../../../trade-intent/dialogs/portfolioDialog/PortfolioBlotterDialog";
-
+import { CreateIndicationDialog } from "../../dialogs/CreateIndicationDialog/CreateIndicationDialog";
 import { SidePanelFooter } from "./SidePanelFooter";
 import { SidePanelHeader } from "./SidePanelHeader";
 import { SidePanelList } from "./SidePanelList";
@@ -20,9 +25,16 @@ export default function SidePanel({
   footerContent,
   className = "",
   loading = false,
+  orders,
 }: SidePanelProps) {
   const { visible, setVisible, hoveredButton, setHoveredButton, handleSelect } =
     useSidePanel(selectedId, onSelect);
+  const user = useAtomValue(userAtom);
+
+  const [showCreateIndication, setShowCreateIndication] = useState(false);
+  const [selectedPortfolios, setSelectedPortfolios] = useState<
+    (PortfolioRow & { allocation: number; comment: string })[]
+  >([]);
 
   return (
     <aside
@@ -52,11 +64,34 @@ export default function SidePanel({
       </div>
 
       <SidePanelFooter footerContent={footerContent} count={data.length} />
-
       <PortfolioBlotterDialog
         visible={visible}
         onClose={() => setVisible(false)}
-        onContinue={() => console.log("Portfolio selected")}
+        onContinue={(selected) => {
+          setSelectedPortfolios(
+            selected.map((row) => ({
+              ...row,
+              allocation: 0,
+              comment: "",
+            }))
+          );
+          setVisible(false);
+          setShowCreateIndication(true);
+        }}
+        orders={orders}
+      />
+      <CreateIndicationDialog
+        visible={showCreateIndication}
+        data={mapPortfolioToCreateOrderRow(
+          selectedPortfolios,
+          selectedId as string,
+          user
+        )}
+        onClose={() => setShowCreateIndication(false)}
+        onSubmit={(finalData) => {
+          console.log("Create indication payload:", finalData);
+          setShowCreateIndication(false);
+        }}
       />
     </aside>
   );

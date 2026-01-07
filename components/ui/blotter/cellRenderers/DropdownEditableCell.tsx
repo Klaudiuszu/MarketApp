@@ -1,6 +1,6 @@
 "use client";
 
-import { CellContext } from "@tanstack/react-table";
+import { CellContext, TableMeta } from "@tanstack/react-table";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 
 type Option = {
@@ -14,6 +14,10 @@ type DropdownEditableCellProps<TData> = {
   placeholder?: string;
 };
 
+interface CustomTableMeta<TData> extends TableMeta<TData> {
+  updateData: (rowIndex: number, columnId: string, value: unknown) => void;
+}
+
 export function DropdownEditableCell<TData>({
   ctx,
   options,
@@ -22,13 +26,15 @@ export function DropdownEditableCell<TData>({
   const { getValue, row, column, table } = ctx;
   const value = getValue() as string | null;
 
+  const meta = table.options.meta as CustomTableMeta<TData> | undefined;
+
   return (
     <Dropdown
       value={value}
       options={options}
       placeholder={placeholder}
       onChange={(e: DropdownChangeEvent) => {
-        table.options.meta?.updateData(row.index, column.id, e.value);
+        meta?.updateData(row.index, column.id, e.value);
       }}
       className="blotter-dropdown w-full"
       panelClassName="blotter-dropdown-panel"

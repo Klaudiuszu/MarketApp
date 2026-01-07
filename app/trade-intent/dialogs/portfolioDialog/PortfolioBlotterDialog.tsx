@@ -1,6 +1,7 @@
 "use client";
+import { ITradeIntentType } from "@/lib/schemas/TradeIntentSchema";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect, useMemo, useState } from "react";
 import { useFetchData } from "../../../../components/hooks/useFetchData";
 import { BlotterDialog } from "../../../../components/ui/dialog/BlotterDialog";
 import {
@@ -11,12 +12,24 @@ import { tanColumns } from "./tanColumns";
 
 type PortfolioBlotterDialogProps = {
   visible: boolean;
+  orders: ITradeIntentType[] | null;
   onClose: () => void;
   onContinue?: (selected: PortfolioRow[]) => void;
 };
 
+const getCarveoutStatus = (
+  carveoutId: string,
+  orders: ITradeIntentType[] | null
+): "OPEN" | "CLOSED" | null => {
+  if (!orders) return null;
+
+  const order = orders.find((o) => o.carveoutId === carveoutId);
+  return order?.state || null;
+};
+
 export const PortfolioBlotterDialog = ({
   visible,
+  orders,
   onClose,
   onContinue,
 }: PortfolioBlotterDialogProps) => {
@@ -36,11 +49,27 @@ export const PortfolioBlotterDialog = ({
     );
   };
 
+  const dataWithDisabled = useMemo(() => {
+    return editableData.map((row) => {
+      const carveoutStatus = getCarveoutStatus(row.carveoutId, orders);
+      const isDisabled = carveoutStatus === "OPEN";
+
+      return {
+        ...row,
+        isDisabled,
+        carveoutStatus,
+      };
+    });
+  }, [editableData, orders]);
+
   const table = useReactTable({
-    data: editableData,
+    data: dataWithDisabled,
     columns: tanColumns,
     getCoreRowModel: getCoreRowModel(),
-    enableRowSelection: true,
+    enableRowSelection: (row) => {
+      return !row.original.isDisabled;
+    },
+    getRowId: (row) => row.carveoutId,
     meta: {
       updateData,
     },

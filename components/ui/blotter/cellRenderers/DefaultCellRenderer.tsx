@@ -4,5 +4,5 @@
  * Default cell renderer for displaying plain text values
  */
 export function DefaultCellRenderer({ value }: { value: any }) {
-  return <div className="text-gray-300">{String(value)}</div>;
+  return <div className="text-gray-300 px-2">{String(value)}</div>;
 }

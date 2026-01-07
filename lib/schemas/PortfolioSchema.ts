@@ -6,6 +6,7 @@ export const PortfolioSchema = z.object({
   portfolioLongName: z.string(),
   carveoutLongName: z.string(),
   currency: z.string(),
+  isDisabled: z.boolean().optional(),
 });
 
 export const PortfolioListSchema = z.array(PortfolioSchema);

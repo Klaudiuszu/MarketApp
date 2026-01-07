@@ -91,11 +91,12 @@ const TradeIntent = () => {
           data={issuesData}
           loading={issuesLoading}
           selectedId={selectedNewIssueID}
+          orders={ordersData}
           onSelect={setSelectedNewIssueID}
         />
       </div>
       <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
-        <div className="flex-1 px-1 mt-1">
+        <div className="flex-1 px-1">
           <div className="h-full bg-gray-900 border border-gray-700 flex flex-col min-h-0">
             <Blotter
               table={table}

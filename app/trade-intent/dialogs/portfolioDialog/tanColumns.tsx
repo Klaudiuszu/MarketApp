@@ -6,12 +6,7 @@ export const tanColumns: ColumnDef<PortfolioRow>[] = [
   {
     id: "isChecked",
     header: "Is Checked",
-    cell: ({ row }) => (
-      <CheckboxSelection
-        checked={row.getIsSelected()}
-        onChange={row.toggleSelected}
-      />
-    ),
+    cell: ({ row }) => <CheckboxSelection row={row} />,
     size: 50,
   },
   {

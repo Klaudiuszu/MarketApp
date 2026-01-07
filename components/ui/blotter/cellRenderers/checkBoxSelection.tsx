@@ -1,24 +1,37 @@
 "use client";
 
+import { Row } from "@tanstack/react-table";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 
 export type CheckboxSelectionProps = {
-  checked: boolean;
-  onChange: (checked: boolean) => void;
+  row: Row<any>; // Przekaż cały wiersz
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
   disabled?: boolean;
   className?: string;
   id?: string;
+  disablePropertyName?: string; // Nazwa property z isDisabled (domyślnie "isDisabled")
 };
 
 export const CheckboxSelection = ({
+  row,
   checked,
   onChange,
-  disabled = false,
+  disabled,
   className = "",
   id,
+  disablePropertyName = "isDisabled",
 }: CheckboxSelectionProps) => {
-  const handleChange = (e: CheckboxChangeEvent) => {
-    onChange(!!e.checked);
+  const isDisabledFromData = row.original[disablePropertyName] || false;
+  const isDisabled = disabled !== undefined ? disabled : isDisabledFromData;
+
+  const isChecked = checked !== undefined ? checked : row.getIsSelected();
+  const handleChange = onChange || row.toggleSelected;
+
+  const handleCheckboxChange = (e: CheckboxChangeEvent) => {
+    if (!isDisabled) {
+      handleChange(!!e.checked);
+    }
   };
 
   return (
@@ -31,9 +44,9 @@ export const CheckboxSelection = ({
     >
       <Checkbox
         inputId={id}
-        checked={checked}
-        disabled={disabled}
-        onChange={handleChange}
+        checked={isChecked}
+        disabled={isDisabled}
+        onChange={handleCheckboxChange}
         pt={{
           root: {
             className: `
@@ -53,7 +66,7 @@ export const CheckboxSelection = ({
         data-[p-highlight=true]:!border-blue-500
         data-[p-highlight=true]:!bg-blue-500
 
-        ${disabled ? "!opacity-50" : ""}
+        ${isDisabled ? "!opacity-50" : ""}
       `,
           },
           icon: {

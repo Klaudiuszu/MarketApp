@@ -4,6 +4,7 @@ import "primeicons/primeicons.css";
 import "primereact/resources/primereact.min.css";
 import "primereact/resources/themes/lara-dark-blue/theme.css";
 import Header from "../../components/Header";
+import { UserAtomHydrator } from "../../lib/atoms/UserAtomHydrator";
 import { auth } from "../../lib/better-auth/auth";
 
 /**
@@ -27,10 +28,15 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <main className="h-screen flex flex-col overflow-hidden">
-      <Header user={user} />
-      <div className="flex-1 min-h-0 flex">{children}</div>
-    </main>
+    <>
+      <UserAtomHydrator user={user} />
+
+      <main className="h-screen flex flex-col overflow-hidden">
+        <Header user={user} />
+        <div className="flex-1 min-h-0 flex">{children}</div>
+      </main>
+    </>
   );
 };
+
 export default Layout;

@@ -1,5 +1,3 @@
-"use client";
-
 import { ColumnDef } from "@tanstack/react-table";
 import { DefaultCellRenderer } from "../../../components/ui/blotter/cellRenderers";
 import { BuySellCellRenderer } from "../../../components/ui/blotter/cellRenderers/BuySellCellRenderer";
@@ -14,18 +12,14 @@ export const tanColumns: ColumnDef<ITradeIntentType>[] = [
     header: "Order ID",
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("id")} />,
     enableSorting: true,
-    size: 150,
-    minSize: 120,
-    maxSize: 200,
+    size: 260,
   },
   {
-    accessorKey: "symbol",
-    header: "Symbol",
-    cell: ({ row }) => <DefaultCellRenderer value={row.getValue("symbol")} />,
+    accessorKey: "state",
+    header: "State",
+    cell: ({ row }) => <BuySellCellRenderer value={row.getValue("state")} />,
     enableSorting: true,
-    size: 110,
-    minSize: 100,
-    maxSize: 120,
+    size: 100,
   },
   {
     accessorKey: "side",
@@ -33,8 +27,24 @@ export const tanColumns: ColumnDef<ITradeIntentType>[] = [
     cell: ({ row }) => <BuySellCellRenderer value={row.getValue("side")} />,
     enableSorting: true,
     size: 100,
-    minSize: 100,
-    maxSize: 100,
+  },
+  {
+    accessorKey: "carveoutLongname",
+    header: "Carveout Long name",
+    cell: ({ row }) => (
+      <DefaultCellRenderer value={row.getValue("carveoutLongname")} />
+    ),
+    enableSorting: true,
+    size: 200,
+  },
+  {
+    accessorKey: "carveoutId",
+    header: "Carveout ID",
+    cell: ({ row }) => (
+      <DefaultCellRenderer value={row.getValue("carveoutId")} />
+    ),
+    enableSorting: true,
+    size: 200,
   },
   {
     accessorKey: "quantity",
@@ -42,8 +52,6 @@ export const tanColumns: ColumnDef<ITradeIntentType>[] = [
     cell: ({ row }) => <DefaultCellRenderer value={row.getValue("quantity")} />,
     enableSorting: true,
     size: 110,
-    minSize: 90,
-    maxSize: 130,
   },
   {
     accessorKey: "price",
@@ -51,40 +59,20 @@ export const tanColumns: ColumnDef<ITradeIntentType>[] = [
     cell: ({ row }) => <CurrencyCellRenderer value={row.getValue("price")} />,
     enableSorting: true,
     size: 120,
-    minSize: 100,
-    maxSize: 150,
   },
   {
-    accessorKey: "orderType",
-    header: "Type",
-    cell: ({ row }) => (
-      <DefaultCellRenderer value={row.getValue("orderType")} />
-    ),
+    accessorKey: "strategy",
+    header: "Strategy",
+    cell: ({ row }) => <DefaultCellRenderer value={row.getValue("strategy")} />,
     enableSorting: true,
-    size: 100,
-    minSize: 80,
-    maxSize: 120,
+    size: 150,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => <DefaultCellRenderer value={row.getValue("status")} />,
+    accessorKey: "trader",
+    header: "Trader",
+    cell: ({ row }) => <DefaultCellRenderer value={row.getValue("trader")} />,
     enableSorting: true,
-    size: 120,
-    minSize: 100,
-    maxSize: 150,
-  },
-  {
-    accessorKey: "timeInForce",
-    header: "TIF",
-    cell: ({ row }) => (
-      <DefaultCellRenderer value={row.getValue("timeInForce")} />
-    ),
-    enableColumnFilter: true,
-    enableSorting: true,
-    size: 80,
-    minSize: 70,
-    maxSize: 100,
+    size: 110,
   },
   {
     accessorKey: "createdAt",
@@ -94,38 +82,7 @@ export const tanColumns: ColumnDef<ITradeIntentType>[] = [
     ),
     enableSorting: true,
     filterFn: dateFilterFn,
-    meta: {
-      filterComponent: DateRangeFilter,
-    },
+    meta: { filterComponent: DateRangeFilter },
     size: 180,
-    minSize: 150,
-    maxSize: 220,
-  },
-  {
-    accessorKey: "traderId",
-    header: "Trader",
-    cell: ({ row }) => <DefaultCellRenderer value={row.getValue("traderId")} />,
-    enableSorting: true,
-    size: 110,
-    minSize: 90,
-    maxSize: 130,
-  },
-  {
-    accessorKey: "account",
-    header: "Account",
-    cell: ({ row }) => <DefaultCellRenderer value={row.getValue("account")} />,
-    enableSorting: true,
-    size: 140,
-    minSize: 120,
-    maxSize: 160,
-  },
-  {
-    accessorKey: "strategy",
-    header: "Strategy",
-    cell: ({ row }) => <DefaultCellRenderer value={row.getValue("strategy")} />,
-    enableSorting: true,
-    size: 150,
-    minSize: 120,
-    maxSize: 200,
   },
 ];
