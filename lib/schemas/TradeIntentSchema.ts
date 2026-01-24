@@ -7,15 +7,17 @@ export const TradeIntentchema = z
   .object({
     id: z.string(),
     newIssueId: z.string(),
+    symbol: z.string(),
     side: Side,
     quantity: z.number(),
     price: z.number(),
     strategy: z.string().nullable().optional(),
-    trader: z.string(),
-    carveoutLongname: z.string(),
+    traderId: z.string(),
+    account: z.string(),
+    orderType: z.string(),
+    status: z.string(),
+    timeInForce: z.string(),
     createdAt: z.string(),
-    state: State,
-    carveoutId: z.string(),
   })
   .strict();
 
