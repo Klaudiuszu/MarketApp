@@ -1,9 +1,22 @@
-export const dateFilterFn = (row: any, columnId: string, filterValue: any) => {
+interface FilterRow {
+  getValue: (columnId: string) => unknown;
+}
+
+interface DateFilterValue {
+  start?: string;
+  end?: string;
+}
+
+export const dateFilterFn = (
+  row: FilterRow,
+  columnId: string,
+  filterValue: DateFilterValue | undefined,
+): boolean => {
   const cellValue = row.getValue(columnId);
   if (!cellValue || !filterValue) return true;
 
   try {
-    const cellDate = new Date(cellValue);
+    const cellDate = new Date(cellValue as string);
 
     if (filterValue.start && filterValue.end) {
       const startDate = new Date(filterValue.start);

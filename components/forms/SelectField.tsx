@@ -41,7 +41,7 @@ type SelectFieldProps<T extends FieldValues> = {
  * @param {string} label - Visible label text for the field.
  * @param {string} placeholder - Placeholder shown when no value selected.
  * @param {Array<{value:string,label:string}>} options - Options to render.
- * @param {any} control - `react-hook-form` control object.
+ * @param {Control<T>} control - `react-hook-form` control object.
  * @param {object} error - Validation error (if any).
  * @param {boolean} required - Whether the field is required.
  * @returns {JSX.Element} A labeled select field wired to react-hook-form.

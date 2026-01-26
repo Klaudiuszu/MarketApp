@@ -1,6 +1,6 @@
 "use client";
 
-import { flexRender, Table } from "@tanstack/react-table";
+import { Cell, flexRender, Row, Table } from "@tanstack/react-table";
 import { ROW_HEIGHT } from "../../../lib/constants";
 
 export type BlotterBodyProps<TData> = {
@@ -55,7 +55,7 @@ export default function BlotterBody<TData>({
 }
 
 type TableRowProps<TData> = {
-  row: any;
+  row: Row<TData>;
   rowIndex: number;
   zebraStriping: BlotterBodyProps<TData>["zebraStriping"];
 };
@@ -85,7 +85,7 @@ function TableRow<TData>({
         maxHeight: ROW_HEIGHT,
       }}
     >
-      {row.getVisibleCells().map((cell: any, cellIndex: number) => (
+      {row.getVisibleCells().map((cell, cellIndex: number) => (
         <TableCell
           key={cell.id}
           cell={cell}
@@ -98,7 +98,7 @@ function TableRow<TData>({
 }
 
 type TableCellProps<TData> = {
-  cell: any;
+  cell: Cell<TData, unknown>;
   cellIndex: number;
   totalCells: number;
 };

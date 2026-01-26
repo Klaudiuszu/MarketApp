@@ -1,7 +1,7 @@
 "use client";
 
 interface BuySellCellRendererProps {
-  value: any;
+  value: unknown;
   buyClassName?: string;
   sellClassName?: string;
 }

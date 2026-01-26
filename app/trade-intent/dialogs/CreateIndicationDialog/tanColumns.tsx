@@ -39,7 +39,7 @@ export const tanColumns: ColumnDef<CreateOrderRow>[] = [
         ctx={ctx}
         options={[
           { label: "OPEN", value: "OPEN" },
-          { label: "CLOSE", value: "CLOSE" },
+          { label: "CLOSED", value: "CLOSED" },
         ]}
         placeholder="Select State"
       />

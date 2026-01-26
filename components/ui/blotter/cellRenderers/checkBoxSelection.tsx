@@ -3,17 +3,17 @@
 import { Row } from "@tanstack/react-table";
 import { Checkbox, CheckboxChangeEvent } from "primereact/checkbox";
 
-export type CheckboxSelectionProps = {
-  row: Row<any>; // Przekaż cały wiersz
+export type CheckboxSelectionProps<TData = Record<string, unknown>> = {
+  row: Row<TData>;
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   disabled?: boolean;
   className?: string;
   id?: string;
-  disablePropertyName?: string; // Nazwa property z isDisabled (domyślnie "isDisabled")
+  disablePropertyName?: string;
 };
 
-export const CheckboxSelection = ({
+export const CheckboxSelection = <TData = Record<string, unknown>,>({
   row,
   checked,
   onChange,
@@ -21,9 +21,13 @@ export const CheckboxSelection = ({
   className = "",
   id,
   disablePropertyName = "isDisabled",
-}: CheckboxSelectionProps) => {
-  const isDisabledFromData = row.original[disablePropertyName] || false;
-  const isDisabled = disabled !== undefined ? disabled : isDisabledFromData;
+}: CheckboxSelectionProps<TData>) => {
+  const isDisabledFromData =
+    ((row.original as Record<string, unknown>)[
+      disablePropertyName
+    ] as boolean) || false;
+  const isDisabled: boolean =
+    disabled !== undefined ? disabled : isDisabledFromData;
 
   const isChecked = checked !== undefined ? checked : row.getIsSelected();
   const handleChange = onChange || row.toggleSelected;

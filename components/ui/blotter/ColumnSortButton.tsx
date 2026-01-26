@@ -2,9 +2,14 @@
 
 import type { Column } from "@tanstack/react-table";
 
-type Props = { column: Column<any, any> };
+type Props<TData = Record<string, unknown>, TValue = unknown> = {
+  column: Column<TData, TValue>;
+};
 
-export default function ColumnSortButton({ column }: Props) {
+export default function ColumnSortButton<
+  TData = Record<string, unknown>,
+  TValue = unknown,
+>({ column }: Props<TData, TValue>) {
   if (!column.getCanSort()) return null;
 
   const sorted = column.getIsSorted(); // 'asc' | 'desc' | false

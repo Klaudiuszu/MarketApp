@@ -11,15 +11,18 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { useState } from "react";
 
-interface ColumnSelectorProps {
-  columns: Column<any>[];
+interface ColumnSelectorProps<
+  TData = Record<string, unknown>,
+  TValue = unknown,
+> {
+  columns: Column<TData, TValue>[];
   onColumnOrderChange: (sourceIndex: number, destinationIndex: number) => void;
 }
 
-export function ColumnSelector({
-  columns,
-  onColumnOrderChange,
-}: ColumnSelectorProps) {
+export function ColumnSelector<
+  TData = Record<string, unknown>,
+  TValue = unknown,
+>({ columns, onColumnOrderChange }: ColumnSelectorProps<TData, TValue>) {
   const [visible, setVisible] = useState(false);
 
   const handleDragEnd = (result: DropResult) => {

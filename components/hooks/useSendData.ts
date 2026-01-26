@@ -7,10 +7,7 @@ export const useSendData = () => {
     process.env.NEXT_PUBLIC_API_URL ||
     (typeof window !== "undefined" ? window.location.origin : "");
 
-  const onSendData = async <T extends any>(
-    endpoint: string,
-    data: T
-  ): Promise<void> => {
+  const onSendData = async <T>(endpoint: string, data: T): Promise<void> => {
     try {
       const url = `${API_URL}${
         endpoint.startsWith("/") ? endpoint : "/" + endpoint
@@ -29,8 +26,9 @@ export const useSendData = () => {
       }
 
       toastService.success("Success", "Data has been submitted successfully");
-    } catch (err: any) {
-      toastService.error("Submission Error", err.message || "Unknown error");
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      toastService.error("Submission Error", errorMessage);
       throw err;
     }
   };

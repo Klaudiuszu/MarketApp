@@ -4,14 +4,25 @@ import type { Column } from "@tanstack/react-table";
 import { useState } from "react";
 import { DateRangeFilter } from "../filters/DateRangeFilter";
 
-type ColumnFilterInputProps = {
-  column: Column<any, any>;
+interface DateFilterValue {
+  start: string;
+  end: string;
+}
+
+type ColumnFilterInputProps<
+  TData = Record<string, unknown>,
+  TValue = unknown,
+> = {
+  column: Column<TData, TValue>;
 };
 /**
  * ColumnFilterInput - Input component for filtering table columns
  * Automatically hides if column doesn't support filtering
  */
-export default function ColumnFilterInput({ column }: ColumnFilterInputProps) {
+export default function ColumnFilterInput<
+  TData = Record<string, unknown>,
+  TValue = unknown,
+>({ column }: ColumnFilterInputProps<TData, TValue>) {
   if (!column.getCanFilter()) return null;
 
   const [showDateFilter, setShowDateFilter] = useState(false);
@@ -21,8 +32,11 @@ export default function ColumnFilterInput({ column }: ColumnFilterInputProps) {
     filterValue !== undefined && filterValue !== null && filterValue !== "";
 
   if (isDateColumn) {
-    const isDateFilterActive =
-      filterValue && ((filterValue as any)?.start || (filterValue as any)?.end);
+    const isDateFilterActive: boolean =
+      (filterValue &&
+        typeof filterValue === "object" &&
+        ((filterValue as DateFilterValue)?.start ||
+          (filterValue as DateFilterValue)?.end)) as boolean;
 
     return (
       <div className="w-full relative">
@@ -33,16 +47,16 @@ export default function ColumnFilterInput({ column }: ColumnFilterInputProps) {
               isDateFilterActive ? "border-blue-500/50 text-blue-300" : ""
             }`}
           >
-            {isDateFilterActive && (
+            {isDateFilterActive ? (
               <div className="w-1 h-1 bg-blue-500 rounded-full mr-0.5"></div>
-            )}
+            ) : null}
             <span className="pi pi-calendar text-[10px]"></span>
             <span className="truncate">
               {isDateFilterActive ? "date filter" : "date..."}
             </span>
           </button>
 
-          {isDateFilterActive && (
+          {isDateFilterActive ? (
             <button
               onClick={() => column.setFilterValue(undefined)}
               className="ml-1 text-gray-400 hover:text-gray-200 text-[10px] h-6 px-1"
@@ -50,14 +64,14 @@ export default function ColumnFilterInput({ column }: ColumnFilterInputProps) {
             >
               ✕
             </button>
-          )}
+          ) : null}
         </div>
 
         {showDateFilter && (
           <div className="absolute top-full left-0 z-50 mt-1">
             <DateRangeFilter
               column={column}
-              onFilter={(value: any) => {
+              onFilter={(value: DateFilterValue | null) => {
                 column.setFilterValue(value);
                 setShowDateFilter(false);
               }}

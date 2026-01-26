@@ -16,7 +16,7 @@ export type BlotterProps<TData> = {
   storageKey?: string;
   customCellRenderers?: Record<
     string,
-    (value: any, row: TData) => React.ReactNode
+    (value: unknown, row: TData) => React.ReactNode
   >;
   customHeaderRenderers?: Record<string, (header: string) => React.ReactNode>;
   zebraStriping?: {

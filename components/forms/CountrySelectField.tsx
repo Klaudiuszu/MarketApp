@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import { Control, Controller, FieldError } from "react-hook-form";
+import { Control, Controller, FieldError, FieldValues } from "react-hook-form";
 import countryList from "react-select-country-list";
 import { Button } from "../../components/ui/button";
 import {
@@ -22,10 +21,10 @@ import {
 } from "../../components/ui/popover";
 import { cn } from "../../lib/utils";
 
-type CountrySelectProps = {
+type CountrySelectProps<T extends FieldValues = FieldValues> = {
   name: string;
   label: string;
-  control: Control<any>;
+  control: Control<T>;
   error?: FieldError;
   required?: boolean;
 };
@@ -109,7 +108,7 @@ const CountrySelect = ({
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4 text-yellow-500",
-                      value === country.value ? "opacity-100" : "opacity-0"
+                      value === country.value ? "opacity-100" : "opacity-0",
                     )}
                   />
                   <span className="flex items-center gap-2">

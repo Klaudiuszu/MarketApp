@@ -2,15 +2,27 @@
 
 import { Button } from "primereact/button";
 import { Calendar } from "primereact/calendar";
-import { Nullable } from "primereact/ts-helpers";
+import type { Nullable } from "primereact/ts-helpers";
 import { useState } from "react";
+import type { Column } from "@tanstack/react-table";
 
-interface DateRangeFilterProps {
-  column: any;
-  onFilter: (value: any) => void;
+interface DateFilterValue {
+  start: string;
+  end: string;
 }
 
-export function DateRangeFilter({ column, onFilter }: DateRangeFilterProps) {
+interface DateRangeFilterProps<
+  TData = Record<string, unknown>,
+  TValue = unknown,
+> {
+  column: Column<TData, TValue>;
+  onFilter: (value: DateFilterValue | null) => void;
+}
+
+export function DateRangeFilter<
+  TData = Record<string, unknown>,
+  TValue = unknown,
+>({ column, onFilter }: DateRangeFilterProps<TData, TValue>) {
   const [dateRange, setDateRange] = useState<[Nullable<Date>, Nullable<Date>]>([
     null,
     null,

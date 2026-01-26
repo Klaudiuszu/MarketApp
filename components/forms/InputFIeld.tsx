@@ -1,4 +1,4 @@
-import { FieldError, RegisterOptions } from "react-hook-form";
+import { FieldError, RegisterOptions, UseFormRegister } from "react-hook-form";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { cn } from "../../lib/utils";
@@ -8,7 +8,7 @@ export type FormInputProps = {
   label: string;
   placeholder: string;
   type?: string;
-  register: any;
+  register: UseFormRegister<Record<string, unknown>>;
   error?: FieldError;
   validation?: RegisterOptions;
   disabled?: boolean;
