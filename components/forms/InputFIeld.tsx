@@ -8,7 +8,7 @@ export type FormInputProps = {
   label: string;
   placeholder: string;
   type?: string;
-  register: UseFormRegister<Record<string, unknown>>;
+  register: UseFormRegister<Record<string, unknown>> | unknown;
   error?: FieldError;
   validation?: RegisterOptions;
   disabled?: boolean;
@@ -56,7 +56,7 @@ const InputField = ({
         className={cn("form-input", {
           "opacity-50 cursor-not-allowed": disabled,
         })}
-        {...register(name, validation)}
+        {...(register as UseFormRegister<Record<string, unknown>>)(name, validation)}
       />
       {error && <p className="text-sm text-red-500">{error.message}</p>}
     </div>

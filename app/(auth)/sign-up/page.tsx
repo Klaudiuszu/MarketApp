@@ -94,7 +94,7 @@ const SignUp = () => {
           validation={{ required: "Password is required", minLength: 8 }}
         />
 
-        <CountrySelectField
+        <CountrySelectField<SignUpFormData>
           name="country"
           label="Country"
           control={control}
@@ -102,7 +102,7 @@ const SignUp = () => {
           required
         />
 
-        <SelectField
+        <SelectField<SignUpFormData>
           name="investmentGoals"
           label="Investment Goals"
           placeholder="Select your investment goal"
@@ -112,7 +112,7 @@ const SignUp = () => {
           required
         />
 
-        <SelectField
+        <SelectField<SignUpFormData>
           name="riskTolerance"
           label="Risk Tolerance"
           placeholder="Select your risk level"
@@ -122,7 +122,7 @@ const SignUp = () => {
           required
         />
 
-        <SelectField
+        <SelectField<SignUpFormData>
           name="preferredIndustry"
           label="Preferred Industry"
           placeholder="Select your preferred industry"

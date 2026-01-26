@@ -20,9 +20,10 @@ import {
   PopoverTrigger,
 } from "../../components/ui/popover";
 import { cn } from "../../lib/utils";
+import { Path } from "react-hook-form";
 
 type CountrySelectProps<T extends FieldValues = FieldValues> = {
-  name: string;
+  name: Path<T>;
   label: string;
   control: Control<T>;
   error?: FieldError;
@@ -125,13 +126,13 @@ const CountrySelect = ({
   );
 };
 
-export const CountrySelectField = ({
+export const CountrySelectField = <T extends FieldValues>({
   name,
   label,
   control,
   error,
   required = false,
-}: CountrySelectProps) => {
+}: CountrySelectProps<T>) => {
   return (
     <div className="space-y-2">
       <Label htmlFor={name} className="form-label">
