@@ -111,7 +111,6 @@ function TableCell<TData>({ cell }: TableCellProps<TData>) {
   const isNumeric = typeof cellValue === "number";
   const columnSize = cell.column.getSize();
 
-  // Use a safe approach for width calculation
   const width = columnSize && columnSize > 0 ? `${columnSize}px` : "auto";
 
   return (
