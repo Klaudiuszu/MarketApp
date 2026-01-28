@@ -113,9 +113,9 @@ const UserDropdown = ({ user, initialStocks }: UserDropdownProps) => {
               <LogOut className="h-4 w-4 text-red-400" />
             </div>
             <div className="flex flex-col">
-              <span className="font-medium">Wyloguj się</span>
+              <span className="font-medium">Log Out</span>
               <span className="text-xs text-gray-500 group-hover:text-red-400/70 transition-colors">
-                Zakończ sesję
+                End your session
               </span>
             </div>
           </DropdownMenuItem>
