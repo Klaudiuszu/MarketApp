@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { CountrySelectField } from "../../../components/forms/CountrySelectField";
 import FooterLink from "../../../components/forms/FooterLink";
-import InputField from "../../../components/forms/InputFIeld";
+import { InputField } from "../../../components/forms/InputFIeld";
 import SelectField from "../../../components/forms/SelectField";
 import { Button } from "../../../components/ui/button";
 import { signUpWithEmail } from "../../../lib/actions/auth.actions";
@@ -31,7 +31,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<SignUpFormData>({
     defaultValues: {
       fullName: "",
@@ -69,18 +69,27 @@ const SignUp = () => {
           placeholder="John Doe"
           register={register}
           error={errors.fullName}
-          validation={{ required: "Full name is required", minLength: 2 }}
+          validation={{
+            required: "Full name is required",
+            minLength: {
+              value: 2,
+              message: "Full name must be at least 2 characters",
+            },
+          }}
         />
 
         <InputField
           name="email"
-          label="Email"
-          placeholder="MariuszPudzianowski@toByNicNieDało.pl"
+          label="Buisness Email"
+          placeholder="example@email.com"
           register={register}
           error={errors.email}
           validation={{
-            required: "Email name is required",
-            pattern: /^\w+@\w+\.\w+$/,
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            },
           }}
         />
 
@@ -91,9 +100,14 @@ const SignUp = () => {
           type="password"
           register={register}
           error={errors.password}
-          validation={{ required: "Password is required", minLength: 8 }}
+          validation={{
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters",
+            },
+          }}
         />
-
         <CountrySelectField<SignUpFormData>
           name="country"
           label="Country"
@@ -101,7 +115,6 @@ const SignUp = () => {
           error={errors.country}
           required
         />
-
         <SelectField<SignUpFormData>
           name="investmentGoals"
           label="Investment Goals"
@@ -111,7 +124,6 @@ const SignUp = () => {
           error={errors.investmentGoals}
           required
         />
-
         <SelectField<SignUpFormData>
           name="riskTolerance"
           label="Risk Tolerance"
@@ -121,7 +133,6 @@ const SignUp = () => {
           error={errors.riskTolerance}
           required
         />
-
         <SelectField<SignUpFormData>
           name="preferredIndustry"
           label="Preferred Industry"
@@ -131,15 +142,15 @@ const SignUp = () => {
           error={errors.preferredIndustry}
           required
         />
-
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isValid}
+          aria-busy={isSubmitting}
+          aria-disabled={isSubmitting || !isValid}
           className="yellow-btn w-full mt-5"
         >
           {isSubmitting ? "Signing Up..." : "Sign Up"}
         </Button>
-
         <FooterLink
           text="Already have an account?"
           linkText="Sign in"
@@ -149,4 +160,5 @@ const SignUp = () => {
     </>
   );
 };
+
 export default SignUp;

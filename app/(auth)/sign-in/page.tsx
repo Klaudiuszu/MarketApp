@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import FooterLink from "../../../components/forms/FooterLink";
-import InputField from "../../../components/forms/InputFIeld";
+import { InputField } from "../../../components/forms/InputFIeld";
 import { Button } from "../../../components/ui/button";
 import { signInWithEmail } from "../../../lib/actions/auth.actions";
 
@@ -18,7 +18,7 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<SignInFormData>({
     defaultValues: {
       email: "loginStockMarketTest@test.com",
@@ -46,13 +46,16 @@ const SignIn = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <InputField
           name="email"
-          label="Email"
+          label="Buisness Email"
           placeholder="loginStockMarketTest@test.com"
           register={register}
           error={errors.email}
           validation={{
             required: "Email is required",
-            pattern: /^\w+@\w+\.\w+$/,
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Please enter a valid email address",
+            },
           }}
         />
 
@@ -63,12 +66,18 @@ const SignIn = () => {
           type="password"
           register={register}
           error={errors.password}
-          validation={{ required: "Password is required", minLength: 8 }}
+          validation={{
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password must be at least 8 characters",
+            },
+          }}
         />
 
         <Button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isValid}
           className="yellow-btn w-full mt-5"
         >
           {isSubmitting ? "Signing In" : "Sign In"}
