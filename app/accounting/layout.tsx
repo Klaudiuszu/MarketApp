@@ -6,6 +6,7 @@ import "primereact/resources/themes/lara-dark-blue/theme.css";
 import Header from "../../components/Header";
 import { UserAtomHydrator } from "../../lib/atoms/UserAtomHydrator";
 import { auth } from "../../lib/better-auth/auth";
+import { CompanyColorsProvider } from "./companyColors";
 
 /**
  * Root Layout Component
@@ -33,7 +34,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
 
       <main className="h-screen flex flex-col overflow-hidden">
         <Header user={user} />
-        <div className="flex-1 min-h-0 flex">{children}</div>
+        <CompanyColorsProvider>{children}</CompanyColorsProvider>
       </main>
     </>
   );

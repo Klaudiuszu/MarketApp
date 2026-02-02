@@ -1,10 +1,12 @@
+"use client";
+
 import { useCallback } from "react";
 import { MIN_WIDGET_HEIGHT, MIN_WIDGET_WIDTH } from "../types/constants";
 import { GridLayoutItem, WidgetConfig } from "../types/types";
 
 /**
  * Custom hook to generate grid layout based on widget configurations
- * Automatically positions widgets in a two-column pattern
+ * Places widgets side by side, moving to next row when needed
  */
 export const useGridLayout = (
   widgets: WidgetConfig[],
@@ -12,26 +14,36 @@ export const useGridLayout = (
   initialY: number = 0,
 ): GridLayoutItem[] => {
   const generateLayout = useCallback((): GridLayoutItem[] => {
+    const layout: GridLayoutItem[] = [];
+    let currentX = 0;
     let currentY = initialY;
+    let maxHeightInCurrentRow = 0;
 
-    return widgets.map((widget, index) => {
-      const isEvenIndex = index % 2 === 0;
-      const xPosition = isEvenIndex ? 0 : cols / 2;
+    widgets.forEach((widget) => {
+      const widgetWidth = widget.defaultWidth || MIN_WIDGET_WIDTH;
+      const widgetHeight = widget.defaultHeight || MIN_WIDGET_HEIGHT;
+
+      if (currentX + widgetWidth > cols) {
+        currentY += maxHeightInCurrentRow;
+        currentX = 0;
+        maxHeightInCurrentRow = 0;
+      }
 
       const item: GridLayoutItem = {
         i: widget.id,
-        x: xPosition,
+        x: currentX,
         y: currentY,
-        w: widget.defaultWidth || MIN_WIDGET_WIDTH,
-        h: widget.defaultHeight || MIN_WIDGET_HEIGHT,
+        w: widgetWidth,
+        h: widgetHeight,
       };
 
-      if (!isEvenIndex) {
-        currentY += item.h;
-      }
+      layout.push(item);
 
-      return item;
+      currentX += widgetWidth;
+      maxHeightInCurrentRow = Math.max(maxHeightInCurrentRow, widgetHeight);
     });
+
+    return layout;
   }, [widgets, cols, initialY]);
 
   return generateLayout();

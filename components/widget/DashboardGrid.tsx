@@ -4,7 +4,9 @@ import ReactGridLayout, { verticalCompactor } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 
-import { GridContainer } from "./GridContainer";
+import { Key } from "react";
+import { GridContainer } from "../widget/GridContainer";
+import { WidgetContainer } from "./WidgetContainer";
 import { useContainerDimensions } from "./hooks/useContainerDimensions";
 import { useGridLayout } from "./hooks/useGridLayout";
 import {
@@ -15,22 +17,9 @@ import {
   getResizeConfig,
 } from "./types/constants";
 import { DashboardGridProps } from "./types/types";
-import { WidgetContainer } from "./WidgetContainer";
 
 /**
  * Main DashboardGrid component
- *
- * A responsive, draggable grid layout for displaying dashboard widgets.
- * Automatically positions widgets and provides drag & drop functionality.
- *
- * @example
- * ```tsx
- * <DashboardGrid
- *   widgets={widgets}
- *   cols={6}
- *   rowHeight={100}
- * />
- * ```
  */
 export const DashboardGrid: React.FC<DashboardGridProps> = ({
   widgets,
@@ -55,11 +44,15 @@ export const DashboardGrid: React.FC<DashboardGridProps> = ({
         autoSize={true}
         compactor={verticalCompactor}
       >
-        {widgets.map((widget) => (
-          <WidgetContainer key={widget.id} widgetId={widget.id}>
-            {widget.component}
-          </WidgetContainer>
-        ))}
+        {widgets.map(
+          (widget: { id: Key | null | undefined; component: any }) => (
+            <div key={widget.id} data-grid={{}}>
+              <WidgetContainer widgetId={widget.id as string}>
+                {widget.component}
+              </WidgetContainer>
+            </div>
+          ),
+        )}
       </ReactGridLayout>
     </GridContainer>
   );
