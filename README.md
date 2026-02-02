@@ -126,6 +126,28 @@
 
 ---
 
+### DashboardGrid Module (New Addition)
+
+https://img.shields.io/badge/React_Grid_Layout-v2-61DAFB?logo=react&logoColor=black
+Purpose: Modular, responsive dashboard system with drag & drop widget functionality.
+
+Key Features:
+
+- Drag & drop widget positioning with handle-based interaction
+- Automatic widget layout generation
+- Responsive container sizing with ResizeObserver
+- Type-safe widget configuration system
+- Modular architecture (separate hooks, components, types)
+
+Integration Points:
+
+- Works with Jotai for global layout state persistence
+- Compatible with Tailwind CSS for consistent styling
+- Supports TanStack Table widgets for trading data displays
+- Responsive design aligns with existing Recharts visualizations
+
+---
+
 ## Design Principles
 
 - **Backend = single source of truth**
