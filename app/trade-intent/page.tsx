@@ -29,7 +29,7 @@ import { tanColumns } from "./TradeIntentView/tanColumns";
 const TradeIntent = () => {
   const toastRef = useRef<Toast>(null);
   const [selectedNewIssueID, setSelectedNewIssueID] = useAtom(
-    atomSelectedNewIssueID
+    atomSelectedNewIssueID,
   );
 
   const {
@@ -83,7 +83,7 @@ const TradeIntent = () => {
   }, []);
 
   return (
-    <div className="flex flex-1 overflow-hidden">
+    <div className="flex flex-1 overflow-hidden w-full">
       <div className="w-[300px]">
         <SidePanel
           title="All Primary Issuances"
